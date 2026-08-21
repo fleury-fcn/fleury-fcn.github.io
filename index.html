@@ -4,6 +4,12 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Fleury Niyokwizera — Data Science & IA</title>
+<meta name="description" content="Portfolio de Fleury Niyokwizera, étudiant en Master Data Science & IA à l'Université de Lille. Créateur de HalalOpenFoodFacts.org et HalalOpenBeautyFacts.org, en recherche d'alternance à partir de septembre 2026.">
+<meta property="og:title" content="Fleury Niyokwizera — Data Science & IA">
+<meta property="og:description" content="Portfolio de Fleury Niyokwizera : Data Science, IA et projets open-source (HalalOpenFoodFacts, HalalOpenBeautyFacts).">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://fleury-fcn.github.io">
+<meta property="og:image" content="https://fleury-fcn.github.io/assets/fleury.png">
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
 
@@ -124,6 +130,10 @@
     .tl-item{ grid-template-columns:1fr; gap:6px; }
   }
   @media (prefers-reduced-motion:reduce){ *{ animation-duration:.01ms !important; transition-duration:.01ms !important; } }
+  .lang-toggle{ display:flex; align-items:center; gap:2px; padding:4px; border:1px solid var(--border); border-radius:99px; margin-left:8px; }
+  .lang-btn{ padding:6px 12px; border-radius:99px; font-family:'JetBrains Mono'; font-size:11.5px; font-weight:600; color:var(--faint); transition:.2s; cursor:pointer; background:none; border:none; }
+  .lang-btn.active{ background:var(--gold); color:#14100A; }
+  .nav-right{ display:flex; align-items:center; }
 </style>
 </head>
 <body>
@@ -131,26 +141,32 @@
 <nav>
   <div class="brand"><div class="brand-mark">FN</div>Fleury Niyokwizera</div>
   <div class="nav-links">
-    <a href="#projets">Projets</a>
-    <a href="#competences">Compétences</a>
-    <a href="#parcours">Parcours</a>
+    <a href="#projets" data-i18n="nav.projects">Projets</a>
+    <a href="#competences" data-i18n="nav.skills">Compétences</a>
+    <a href="#parcours" data-i18n="nav.path">Parcours</a>
   </div>
-  <a href="#contact" class="nav-cta">Me contacter</a>
+  <div class="nav-right">
+    <a href="#contact" class="nav-cta" data-i18n="nav.contact">Me contacter</a>
+    <div class="lang-toggle">
+      <button class="lang-btn active" data-lang="fr" onclick="setLang('fr')">FR</button>
+      <button class="lang-btn" data-lang="en" onclick="setLang('en')">EN</button>
+    </div>
+  </div>
 </nav>
 
 <section class="hero">
   <div>
-    <div class="eyebrow">Disponible pour une alternance · Septembre 2026</div>
-    <h1>Data Science & Intelligence <em>Artificielle</em>,<br>appliquées à des problèmes réels.</h1>
-    <p class="hero-sub">Étudiant en Master à l'Université de Lille, je conçois des systèmes de données de bout en bout — du pipeline de collecte au modèle prédictif — et je maintiens deux plateformes open-source utilisées par des milliers de contributeurs.</p>
+    <div class="eyebrow" data-i18n="hero.eyebrow">Disponible pour une alternance · Septembre 2026</div>
+    <h1 data-i18n-html="hero.title">Data Science & Intelligence <em>Artificielle</em>,<br>appliquées à des problèmes réels.</h1>
+    <p class="hero-sub" data-i18n="hero.sub">Étudiant en Master Mathématiques et Statistiques, parcours Data Modeling, à l'Université de Lille. Je conçois des systèmes de données de bout en bout — du pipeline de collecte au modèle prédictif — et je maintiens deux plateformes open-source d'E-halal utilisées par des milliers de contributeurs.</p>
     <div class="hero-actions">
-      <a href="#projets" class="btn-primary">Voir mes projets →</a>
-      <a href="assets/cv-fleury-niyokwizera.pdf" class="btn-ghost" target="_blank">Télécharger mon CV</a>
+      <a href="#projets" class="btn-primary" data-i18n="hero.cta1">Voir mes projets →</a>
+      <a href="assets/cv-fleury-niyokwizera.pdf" class="btn-ghost" target="_blank" data-i18n="hero.cta2">Télécharger mon CV</a>
     </div>
     <div class="hero-stats">
-      <div><div class="stat-num">2</div><div class="stat-label">PLATEFORMES OPEN-SOURCE</div></div>
-      <div><div class="stat-num">4.5M+</div><div class="stat-label">PRODUITS EN BASE (E-HALAL)</div></div>
-      <div><div class="stat-num">6+</div><div class="stat-label">TECHNOLOGIES MAÎTRISÉES</div></div>
+      <div><div class="stat-num">2</div><div class="stat-label" data-i18n="hero.stat1">PLATEFORMES OPEN-SOURCE</div></div>
+      <div><div class="stat-num">4.5M+</div><div class="stat-label" data-i18n="hero.stat2">PRODUITS EN BASE (E-HALAL)</div></div>
+      <div><div class="stat-num">6+</div><div class="stat-label" data-i18n="hero.stat3">TECHNOLOGIES MAÎTRISÉES</div></div>
     </div>
   </div>
   <div class="hero-photo"><img src="assets/fleury.png" alt="Fleury Niyokwizera"></div>
@@ -158,16 +174,16 @@
 
 <section id="projets">
   <div class="section-head reveal">
-    <div class="section-eyebrow">Projets sélectionnés</div>
-    <div class="section-title">Ce que j'ai <em>construit.</em></div>
+    <div class="section-eyebrow" data-i18n="proj.eyebrow">Projets sélectionnés</div>
+    <div class="section-title" data-i18n-html="proj.title">Ce que j'ai <em>construit.</em></div>
   </div>
   <div class="projects">
 
     <a href="https://halalopenfoodfacts.org" target="_blank" class="project-card reveal">
       <div>
-        <div class="project-tag">Chief Engineer · E-halal</div>
+        <div class="project-tag" data-i18n="proj.p1.tag">Chief Engineer · E-halal</div>
         <h3>HalalOpenFoodFacts & HalalOpenBeautyFacts</h3>
-        <p>Deux plateformes open-source construites et maintenues seul : base de données collaborative de plus de 4,5M produits, API publique, scan de conformité halal en temps réel.</p>
+        <p data-i18n="proj.p1.desc">Deux plateformes open-source construites et maintenues seul : base de données collaborative de plus de 4,5M produits, API publique, scan de conformité halal en temps réel.</p>
         <div class="stack-row">
           <div class="stack-pill">Django REST</div>
           <div class="stack-pill">PostgreSQL</div>
@@ -186,9 +202,9 @@
 
     <a href="https://github.com/fleury-fcn/prediction-sinistres-machine-learning" target="_blank" class="project-card reveal">
       <div>
-        <div class="project-tag">Machine Learning</div>
-        <h3>Prédiction de sinistres — Assurance</h3>
-        <p>Pipeline ML modulaire pour la prédiction de sinistres : optimisation d'hyperparamètres via RandomizedSearchCV, validation croisée robuste et sérialisation des modèles pour mise en production.</p>
+        <div class="project-tag" data-i18n="proj.p2.tag">Machine Learning</div>
+        <h3 data-i18n="proj.p2.title">Prédiction de sinistres — Assurance</h3>
+        <p data-i18n="proj.p2.desc">Pipeline ML modulaire pour la prédiction de sinistres : optimisation d'hyperparamètres via RandomizedSearchCV, validation croisée robuste et sérialisation des modèles pour mise en production.</p>
         <div class="stack-row">
           <div class="stack-pill">Python</div>
           <div class="stack-pill">Scikit-learn</div>
@@ -201,9 +217,9 @@
 
     <div class="project-card reveal">
       <div>
-        <div class="project-tag">Big Data · ISTA</div>
-        <h3>Pipeline NYC Yellow Taxi</h3>
-        <p>Traitement distribué de données massives de trajets new-yorkais, avec dashboard interactif de restitution des indicateurs clés en temps réel.</p>
+        <div class="project-tag" data-i18n="proj.p3.tag">Big Data · ISTA</div>
+        <h3 data-i18n="proj.p3.title">Pipeline NYC Yellow Taxi</h3>
+        <p data-i18n="proj.p3.desc">Traitement distribué de données massives de trajets new-yorkais, avec dashboard interactif de restitution des indicateurs clés en temps réel.</p>
         <div class="stack-row">
           <div class="stack-pill">PySpark</div>
           <div class="stack-pill">Streamlit</div>
@@ -214,9 +230,9 @@
 
     <div class="project-card reveal">
       <div>
-        <div class="project-tag">Statistiques appliquées</div>
-        <h3>Étude ISOKO IRAMA / SESA (projet UE)</h3>
-        <p>Analyse statistique complète sur 489 répondants pour un projet financé par l'UE, avec méthodologie stricte de séparation structures/individus et collecte terrain via KoboCollect.</p>
+        <div class="project-tag" data-i18n="proj.p4.tag">Statistiques appliquées</div>
+        <h3 data-i18n="proj.p4.title">Étude ISOKO IRAMA / SESA (projet UE)</h3>
+        <p data-i18n="proj.p4.desc">Analyse statistique complète sur 489 répondants pour un projet financé par l'UE, avec méthodologie stricte de séparation structures/individus et collecte terrain via KoboCollect.</p>
         <div class="stack-row">
           <div class="stack-pill">R</div>
           <div class="stack-pill">KoboToolbox</div>
@@ -231,8 +247,8 @@
 
 <section id="competences">
   <div class="section-head reveal">
-    <div class="section-eyebrow">Boîte à outils</div>
-    <div class="section-title">Compétences <em>techniques.</em></div>
+    <div class="section-eyebrow" data-i18n="skills.eyebrow">Boîte à outils</div>
+    <div class="section-title" data-i18n-html="skills.title">Compétences <em>techniques.</em></div>
   </div>
   <div class="skills-grid">
     <div class="skill-chip reveal">Python</div>
@@ -247,37 +263,37 @@
     <div class="skill-chip reveal">Scikit-learn</div>
     <div class="skill-chip reveal">Stata / Eviews</div>
     <div class="skill-chip reveal">CSPro</div>
-    <div class="skill-chip reveal">Excel avancé</div>
+    <div class="skill-chip reveal" data-i18n="skills.excel">Excel avancé</div>
     <div class="skill-chip reveal">VBA</div>
   </div>
 </section>
 
 <section id="parcours">
   <div class="section-head reveal">
-    <div class="section-eyebrow">Parcours</div>
-    <div class="section-title">D'où je <em>viens.</em></div>
+    <div class="section-eyebrow" data-i18n="path.eyebrow">Parcours</div>
+    <div class="section-title" data-i18n-html="path.title">D'où je <em>viens.</em></div>
   </div>
   <div class="timeline">
     <div class="tl-item reveal">
       <div class="tl-date">2025 — 2027</div>
-      <div><h4>Master 1 Modélisation des Données, parcours IA</h4><p>Université de Lille</p></div>
+      <div><h4 data-i18n="path.t1.title">Master Mathématiques et Statistiques, parcours Data Modeling</h4><p data-i18n="path.t1.sub">Université de Lille</p></div>
     </div>
     <div class="tl-item reveal">
       <div class="tl-date">2023 — 2025</div>
-      <div><h4>Master 2 Statistique Appliquée et Informatique Décisionnelle</h4><p>ISTA — Université du Burundi</p></div>
+      <div><h4 data-i18n="path.t2.title">Master 2 Statistique Appliquée et Informatique Décisionnelle</h4><p data-i18n="path.t2.sub">ISTA — Université du Burundi</p></div>
     </div>
     <div class="tl-item reveal">
-      <div class="tl-date">Depuis 2024</div>
-      <div><h4>Chief Engineer — E-halal (association loi 1901)</h4><p>Conception et maintenance de HalalOpenFoodFacts.org et HalalOpenBeautyFacts.org</p></div>
+      <div class="tl-date" data-i18n="path.t3.date">Depuis 2024</div>
+      <div><h4 data-i18n="path.t3.title">Chief Engineer — E-halal (association loi 1901)</h4><p data-i18n="path.t3.sub">Conception et maintenance de HalalOpenFoodFacts.org et HalalOpenBeautyFacts.org</p></div>
     </div>
   </div>
 </section>
 
 <section class="cta-section reveal" id="contact">
-  <h2>Construisons quelque chose<br>d'<em>utile</em>, ensemble.</h2>
-  <p>Ouvert aux opportunités d'alternance en Data Science et Ingénierie Logicielle à partir de septembre 2026.</p>
+  <h2 data-i18n-html="cta.title">Construisons quelque chose<br>d'<em>utile</em>, ensemble.</h2>
+  <p data-i18n="cta.sub">Ouvert aux opportunités d'alternance en Data Science et Ingénierie Logicielle à partir de septembre 2026.</p>
   <div class="contact-links">
-    <a href="mailto:fleuryniyokwizera2021@gmail.com" class="btn-primary">Écrire un email</a>
+    <a href="mailto:fleuryniyokwizera2021@gmail.com" class="btn-primary" data-i18n="cta.email">Écrire un email</a>
     <a href="https://www.linkedin.com/in/fleury-niyokwizera-2a9436291" class="btn-ghost">LinkedIn</a>
     <a href="https://github.com/fleury-fcn" class="btn-ghost">GitHub</a>
   </div>
@@ -285,7 +301,7 @@
 
 <footer>
   <div>© 2026 Fleury Niyokwizera</div>
-  <div>Lille, France</div>
+  <div data-i18n="footer.loc">Lille, France</div>
 </footer>
 
 <script>
@@ -293,6 +309,58 @@
     entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); } });
   }, { threshold: 0.15 });
   document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
+
+  const translations = {
+    en: {
+      "nav.projects":"Projects","nav.skills":"Skills","nav.path":"Journey","nav.contact":"Contact me",
+      "hero.eyebrow":"Available for an apprenticeship · September 2026",
+      "hero.title":"Data Science & Artificial <em>Intelligence</em>,<br>applied to real problems.",
+      "hero.sub":"Master's student in Mathematics and Statistics, Data Modeling track, at Université de Lille. I build end-to-end data systems — from collection pipelines to predictive models — and maintain two open-source platforms at E-halal used by thousands of contributors.",
+      "hero.cta1":"View my projects →","hero.cta2":"Download my CV",
+      "hero.stat1":"OPEN-SOURCE PLATFORMS","hero.stat2":"PRODUCTS IN DATABASE (E-HALAL)","hero.stat3":"TECHNOLOGIES MASTERED",
+      "proj.eyebrow":"Selected projects","proj.title":"What I've <em>built.</em>",
+      "proj.p1.tag":"Chief Engineer · E-halal",
+      "proj.p1.desc":"Two open-source platforms built and maintained solo: a collaborative database of over 4.5M products, a public API, real-time halal compliance scanning.",
+      "proj.p2.tag":"Machine Learning","proj.p2.title":"Insurance Claims Prediction",
+      "proj.p2.desc":"Modular ML pipeline for claims prediction: hyperparameter tuning via RandomizedSearchCV, robust cross-validation, and model serialization for production.",
+      "proj.p3.tag":"Big Data · ISTA","proj.p3.title":"NYC Yellow Taxi Pipeline",
+      "proj.p3.desc":"Distributed processing of massive New York trip data, with an interactive dashboard reporting key metrics in real time.",
+      "proj.p4.tag":"Applied Statistics","proj.p4.title":"ISOKO IRAMA / SESA Study (EU-funded project)",
+      "proj.p4.desc":"Full statistical analysis on 489 respondents for an EU-funded project, with strict structures/individuals separation methodology and field data collection via KoboCollect.",
+      "skills.eyebrow":"Toolbox","skills.title":"Technical <em>skills.</em>","skills.excel":"Advanced Excel",
+      "path.eyebrow":"Journey","path.title":"Where I come <em>from.</em>",
+      "path.t1.title":"Master in Mathematics and Statistics, Data Modeling track","path.t1.sub":"Université de Lille",
+      "path.t2.title":"Master 2 Applied Statistics & Decision Support IT","path.t2.sub":"ISTA — University of Burundi",
+      "path.t3.date":"Since 2024","path.t3.title":"Chief Engineer — E-halal (French non-profit)","path.t3.sub":"Design and maintenance of HalalOpenFoodFacts.org and HalalOpenBeautyFacts.org",
+      "cta.title":"Let's build something<br><em>useful</em>, together.",
+      "cta.sub":"Open to apprenticeship opportunities in Data Science and Software Engineering starting September 2026.",
+      "cta.email":"Send an email","footer.loc":"Lille, France"
+    }
+  };
+
+  const originals = {};
+  document.querySelectorAll('[data-i18n]').forEach(el=> originals[el.getAttribute('data-i18n')] = el.textContent );
+  document.querySelectorAll('[data-i18n-html]').forEach(el=> originals[el.getAttribute('data-i18n-html')] = el.innerHTML );
+
+  function setLang(lang){
+    document.documentElement.lang = lang;
+    document.querySelectorAll('.lang-btn').forEach(b=> b.classList.toggle('active', b.dataset.lang===lang) );
+
+    document.querySelectorAll('[data-i18n]').forEach(el=>{
+      const key = el.getAttribute('data-i18n');
+      el.textContent = lang==='en' ? (translations.en[key] || originals[key]) : originals[key];
+    });
+    document.querySelectorAll('[data-i18n-html]').forEach(el=>{
+      const key = el.getAttribute('data-i18n-html');
+      el.innerHTML = lang==='en' ? (translations.en[key] || originals[key]) : originals[key];
+    });
+    try{ localStorage.setItem('fn-lang', lang); }catch(e){}
+  }
+
+  try{
+    const saved = localStorage.getItem('fn-lang');
+    if(saved === 'en') setLang('en');
+  }catch(e){}
 </script>
 
 </body>
