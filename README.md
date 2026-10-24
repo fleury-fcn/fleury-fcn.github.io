@@ -74,4 +74,4 @@ GitHub Pages serves the repository from `main`. The generated pages are committe
 ## 📫 Contact
 
 - Email: fleuryniyokwizera2021@gmail.com
-- [LinkedIn](https://www.linkedin.com/in/fleury-niyokwizera-2a9436291) · [GitHub](https://github.com/fleury-fcn)
+- [LinkedIn](https://www.linkedin.com/in/fleuryniyokwizera) · [GitHub](https://github.com/fleury-fcn)
