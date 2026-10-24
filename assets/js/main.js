@@ -1,310 +1,291 @@
 // Portfolio — Fleury Niyokwizera
-// Navigation, thème clair/sombre, bascule FR/EN, CV par langue, stats GitHub.
+// Script principal, toujours chargé : navigation, thème, langue, contact,
+// stats GitHub, panneau de détail des projets. Les animations lourdes
+// (GSAP, Lenis, canvas) sont chargées à la demande par loadMotion().
 
-const CV = {
-  fr: 'assets/cv-fleury-niyokwizera.pdf',
-  en: 'assets/cv-fleury-niyokwizera-en.pdf'
-};
-const EMAIL = 'fleuryniyokwizera2021@gmail.com';
-const GH_USER = 'fleury-fcn';
+(function(){
+  'use strict';
 
-/* ----------------------------------------------------------
-   Traductions anglaises (le français est dans le HTML)
-   ---------------------------------------------------------- */
-const translations = {
-  en: {
-    "meta.title": "Fleury Niyokwizera — Data & AI · Work-study",
-    "meta.description": "Fleury Niyokwizera, Chief Engineer at E-halal and first-year Master's student in MIASHS (Data Modeling) at Université de Lille. Looking for a Data Analyst, Data Scientist, Data Engineer or BI work-study position, starting as soon as possible.",
+  const root = document.documentElement;
+  const GH_USER = 'fleury-fcn';
+  const finePointer = window.matchMedia('(hover:hover) and (pointer:fine)').matches;
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const dicts = {};
+  const idle = (fn, ms) => window.requestIdleCallback ? requestIdleCallback(fn, { timeout: ms }) : setTimeout(fn, ms);
 
-    "a11y.skip": "Skip to content",
-    "a11y.nav": "Main navigation",
-    "a11y.menu": "Open menu",
-    "a11y.theme": "Toggle theme",
-    "a11y.tech": "Technologies",
+  /* ---------------------------------------------------------------
+     En-tête : état au scroll, menu mobile, lien actif
+     --------------------------------------------------------------- */
+  const header = document.querySelector('.header');
+  const onScroll = () => header.classList.toggle('is-scrolled', window.scrollY > 8);
+  onScroll();
+  window.addEventListener('scroll', onScroll, { passive: true });
 
-    "nav.home": "Home", "nav.about": "About", "nav.projects": "Projects",
-    "nav.path": "Experience", "nav.skills": "Skills", "nav.contact": "Contact",
-
-    "hero.status": "Available for a work-study position as soon as possible · France and Belgium",
-    "hero.role": "Chief Engineer @ E-halal | Master's in Data Modeling",
-    "hero.lead": "I build data products for real users: open databases, pipelines and AI agents in production.",
-    "hero.cta.projects": "View my projects",
-    "hero.cta.cv": "Download my CV",
-    "hero.cta.contact": "Contact me",
-    "hero.photo.alt": "Portrait of Fleury Niyokwizera",
-
-    "about.title": "About",
-    "about.p1": "I am Chief Engineer at E-halal, a French non-profit. I design and maintain two open-source platforms in production: Halal Open Food Facts (4.5M+ food products) and Halal Open Beauty Facts (67,000+ cosmetics).",
-    "about.p2": "I am also a first-year Master's student in MIASHS, Data Modeling track, at Université de Lille, after a Bachelor's in actuarial science and a Master's in applied statistics at ISTA (University of Burundi).",
-    "about.p3": "I am looking for a work-study position as a Data Analyst, Data Scientist, Data Engineer or BI analyst. I bring hands-on experience of the full data chain: collection, modeling, deployment and reporting.",
-    "about.f1.k": "Looking for", "about.f1.v": "Data / BI work-study, as soon as possible",
-    "about.f2.k": "Location", "about.f2.v": "Lille · open to France and Belgium",
-    "about.f3.k": "Education", "about.f3.v": "Master 1 MIASHS, Data Modeling — Université de Lille",
-    "about.f4.k": "Languages", "about.f4.v": "French C2 · English C2",
-
-    "proj.title": "Projects",
-    "proj.others": "Other projects",
-
-    "feat.kicker": "Featured project · E-halal · 2026",
-    "feat.title": "Halal Assistant: an AI agent for Halal Open Food Facts and Halal Open Beauty Facts",
-    "feat.problem.h": "Problem",
-    "feat.problem.p": "The two databases hold millions of product records. Finding a suitable product, understanding its halal status or knowing how to contribute required mastering the sites' search and filters.",
-    "feat.solution.h": "Solution",
-    "feat.solution.p": "A conversational assistant built into both sites. It relies on the product database (RAG) and on Claude, via OpenRouter, to answer in plain language, with a link to every product it cites.",
-    "feat.f1": "Answers questions about a product.",
-    "feat.f2": "Assesses halal compliance from the ingredients, and distinguishes a verified label from one declared by contributors.",
-    "feat.f3": "Helps users choose halal products that match their request.",
-    "feat.f4": "Helps complete a product record.",
-    "feat.f5": "Guides users through the sites.",
-    "feat.role.h": "My role",
-    "feat.role.p": "Designed the agent and integrated it into both platforms, as E-halal's Chief Engineer.",
-    "feat.results.h": "Results",
-    "feat.r1": "In production on halalopenfoodfacts.org and halalopenbeautyfacts.org.",
-    "feat.r2": "Visible safeguards: a warning about AI limits, a nuanced status (compatible, ambiguous) and a link to the source record.",
-    "feat.img1.alt": "Halal Assistant suggests products for the query “halal milk”, with a status and a link to each product record",
-    "feat.img1.cap": "Agent answer on halalopenfoodfacts.org (in French).",
-    "feat.flow1": "User question",
-    "feat.flow2": "Search in the product database (RAG)",
-    "feat.flow3": "Generation by Claude via OpenRouter",
-    "feat.flow4": "Answer with links to product records",
-    "feat.flow.cap": "How the agent works, simplified.",
-
-    "p1.tag": "Data Engineering · E-halal",
-    "p1.desc": "Two open-source platforms self-hosted on OVHcloud. 4.5M+ products imported from Open Food Facts and synchronised automatically, a public API, and statistics recomputed after each sync.",
-    "p2.tag": "Machine Learning",
-    "p2.title": "Insurance claims prediction",
-    "p2.desc": "Modular ML pipeline: hyperparameter search (RandomizedSearchCV), cross-validation, configurable dataset mapping and model serialisation.",
-    "p3.tag": "Big Data · ISTA",
-    "p3.title": "NYC Yellow Taxi Big Data pipeline",
-    "p3.desc": "Distributed processing of New York taxi trips, 4 machine learning models and an interactive reporting dashboard.",
-    "p4.tag": "Applied statistics",
-    "p4.title": "ISOKO IRAMA / SESA study (EU-funded project)",
-    "p4.desc": "Statistical analysis of 489 respondents, with a methodological split between organisations and individuals, and field data collection via KoboCollect.",
-    "p5.tag": "Full-stack · Marketplace",
-    "p5.desc": "Classified ads marketplace for North Africa: geographic search, guided listing creation, buyer/seller messaging, automatic moderation and back-office.",
-    "p6.tag": "First-year Master's project · ISTA",
-    "p6.desc": "University management platform for ISTA (University of Burundi): students, faculty, courses, library and internal messaging.",
-    "p7.tag": "Personal project",
-    "p7.desc": "Personal finance tracker in BIF/EUR, in a single HTML page, synchronised through the GitHub Gist API.",
-
-    "path.title": "Experience",
-    "path.exp": "Work experience",
-    "path.edu": "Education",
-    "x1.date": "Since Oct. 2025 · Lille",
-    "x1.title": "Chief Engineer — E-halal (French non-profit)",
-    "x1.b1": "Design and maintain two open-source platforms in production (Django REST, PostgreSQL, Docker, Redis/Celery).",
-    "x1.b2": "Migrated to self-hosted OVHcloud infrastructure: 4.5M+ products imported and synchronised automatically, with no dependency on the public Open Food Facts API.",
-    "x1.b3": "Integrated Halal Assistant, an AI agent (Claude via OpenRouter, RAG) deployed on both sites.",
-    "x1.b4": "Set up open-source contribution: CI, documentation, licence and security policy.",
-    "x2.date": "Feb. – June 2025 · Burundi",
-    "x2.title": "Assistant consultant, monitoring & evaluation — UMWUGA N'AKAZI project (CREOPS, BBIN, WHH)",
-    "x2.b1": "Collected and analysed field data (KoboToolbox); produced indicators and statistical reports for a socio-economic inclusion project.",
-    "x3.date": "July – Oct. 2024 · Burundi",
-    "x3.title": "Data Science intern, insurance — SOCAR Vie",
-    "x3.b1": "Studied and prototyped the use of AI in life insurance pricing.",
-    "e1.title": "Master 1 MIASHS, Data Modeling track",
-    "e1.sub": "Université de Lille",
-    "e2.title": "Master's in Applied Statistics and Business Intelligence",
-    "e2.sub": "ISTA, University of Burundi · thesis being finalised",
-    "e3.title": "Bachelor's in Actuarial Science, Risk Analysis",
-    "e3.sub": "ISTA, University of Burundi",
-
-    "skills.title": "Skills",
-    "s1.h": "Data & machine learning", "s1.stats": "Statistical analysis",
-    "s2.h": "Generative AI",
-    "s3.h": "Visualisation & BI", "s3.excel": "Advanced Excel",
-    "s4.h": "Databases",
-    "s5.h": "Development",
-    "s6.h": "Infrastructure",
-    "s7.h": "Statistical tools",
-
-    "contact.title": "Contact",
-    "contact.lead": "Hiring a Data or BI work-study student? Reach me by email or on LinkedIn.",
-    "contact.copy": "Copy email",
-    "contact.copied": "Email address copied.",
-    "contact.copyFail": "Copy failed. The address is: ",
-
-    "gh.label": "On GitHub", "gh.repos": "public repos", "gh.followers": "followers", "gh.stars": "stars",
-    "gh.chart.alt": "Fleury Niyokwizera's GitHub contributions over one year",
-
-    "footer.loc": "Lille, France"
-  },
-  // Chaînes générées par le JS, en français
-  fr: {
-    "contact.copied": "Adresse email copiée.",
-    "contact.copyFail": "La copie a échoué. L'adresse est : "
-  }
-};
-
-const root = document.documentElement;
-let currentLang = 'fr';
-const t = (key) => (translations[currentLang] && translations[currentLang][key]) || originals[key] || '';
-
-/* ----------------------------------------------------------
-   Bascule FR / EN
-   ---------------------------------------------------------- */
-const originals = {};
-const descMeta = document.querySelector('meta[name="description"]');
-originals['meta.title'] = document.title;
-originals['meta.description'] = descMeta ? descMeta.content : '';
-document.querySelectorAll('[data-i18n]').forEach(el => { originals[el.dataset.i18n] = el.textContent; });
-document.querySelectorAll('[data-i18n-aria]').forEach(el => { originals[el.dataset.i18nAria] = el.getAttribute('aria-label'); });
-document.querySelectorAll('[data-i18n-alt]').forEach(el => { originals[el.dataset.i18nAlt] = el.getAttribute('alt'); });
-
-function setLang(lang){
-  currentLang = lang === 'en' ? 'en' : 'fr';
-  const dict = currentLang === 'en' ? translations.en : {};
-  const pick = (key) => dict[key] || originals[key];
-
-  root.lang = currentLang;
-  document.title = pick('meta.title');
-  if(descMeta) descMeta.content = pick('meta.description');
-  document.querySelectorAll('[data-i18n]').forEach(el => { el.textContent = pick(el.dataset.i18n); });
-  document.querySelectorAll('[data-i18n-aria]').forEach(el => { el.setAttribute('aria-label', pick(el.dataset.i18nAria)); });
-  document.querySelectorAll('[data-i18n-alt]').forEach(el => { el.setAttribute('alt', pick(el.dataset.i18nAlt)); });
-  document.querySelectorAll('.lang-btn').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.lang === currentLang)));
-
-  updateCvLinks();
-
-  // URL partageable : ?lang=en (cible du hreflang anglais)
-  const url = new URL(window.location.href);
-  if(currentLang === 'en') url.searchParams.set('lang', 'en'); else url.searchParams.delete('lang');
-  history.replaceState(null, '', url);
-
-  try{ localStorage.setItem('fn-lang', currentLang); }catch(e){}
-}
-
-document.querySelectorAll('.lang-btn').forEach(b => b.addEventListener('click', () => setLang(b.dataset.lang)));
-
-/* ----------------------------------------------------------
-   CV : version anglaise si le fichier existe, sinon version française
-   ---------------------------------------------------------- */
-let cvEnAvailable = false;
-
-function updateCvLinks(){
-  const href = currentLang === 'en' && cvEnAvailable ? CV.en : CV.fr;
-  document.querySelectorAll('.js-cv').forEach(a => a.setAttribute('href', href));
-}
-
-fetch(CV.en, { method: 'HEAD' })
-  .then(res => { cvEnAvailable = res.ok; updateCvLinks(); })
-  .catch(() => {});
-
-/* ----------------------------------------------------------
-   Thème clair / sombre
-   ---------------------------------------------------------- */
-const themeBtn = document.getElementById('themeToggle');
-const darkQuery = window.matchMedia('(prefers-color-scheme: dark)');
-
-function isDark(){
-  return root.dataset.theme ? root.dataset.theme === 'dark' : darkQuery.matches;
-}
-if(themeBtn){
-  themeBtn.addEventListener('click', () => {
-    const next = isDark() ? 'light' : 'dark';
-    root.dataset.theme = next;
-    try{ localStorage.setItem('fn-theme', next); }catch(e){}
+  const menuBtn = document.querySelector('.menu-btn');
+  const menu = document.getElementById('menu');
+  const closeMenu = () => { menu.classList.remove('is-open'); menuBtn.setAttribute('aria-expanded', 'false'); };
+  menuBtn.addEventListener('click', () => {
+    const open = menu.classList.toggle('is-open');
+    menuBtn.setAttribute('aria-expanded', String(open));
   });
-}
+  menu.querySelectorAll('.menu-links a').forEach(a => a.addEventListener('click', closeMenu));
+  document.addEventListener('keydown', e => { if(e.key === 'Escape') closeMenu(); });
 
-/* ----------------------------------------------------------
-   Menu mobile
-   ---------------------------------------------------------- */
-const navToggle = document.querySelector('.nav-toggle');
-const navMenu = document.getElementById('navMenu');
-
-function closeMenu(){
-  if(!navMenu) return;
-  navMenu.classList.remove('open');
-  navToggle.setAttribute('aria-expanded', 'false');
-}
-if(navToggle && navMenu){
-  navToggle.addEventListener('click', () => {
-    const open = navMenu.classList.toggle('open');
-    navToggle.setAttribute('aria-expanded', String(open));
-  });
-  navMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMenu));
-  document.addEventListener('keydown', (e) => { if(e.key === 'Escape') closeMenu(); });
-}
-
-/* ----------------------------------------------------------
-   Lien actif dans la navigation selon la section visible
-   ---------------------------------------------------------- */
-const navLinks = Array.from(document.querySelectorAll('.nav-links a'));
-if('IntersectionObserver' in window){
-  const spy = new IntersectionObserver((entries) => {
+  const navLinks = [...document.querySelectorAll('.menu-links a')];
+  const spy = new IntersectionObserver(entries => {
     entries.forEach(entry => {
       if(!entry.isIntersecting) return;
       navLinks.forEach(a => {
-        const active = a.getAttribute('href') === '#' + entry.target.id;
-        a.classList.toggle('active', active);
-        if(active) a.setAttribute('aria-current', 'true'); else a.removeAttribute('aria-current');
+        const on = a.getAttribute('href') === '#' + entry.target.id;
+        a.classList.toggle('is-active', on);
+        on ? a.setAttribute('aria-current', 'location') : a.removeAttribute('aria-current');
       });
     });
   }, { rootMargin: '-45% 0px -50% 0px' });
-  document.querySelectorAll('main section[id]').forEach(s => spy.observe(s));
-}
+  document.querySelectorAll('main > section[id]').forEach(s => spy.observe(s));
 
-/* ----------------------------------------------------------
-   Copier l'email
-   ---------------------------------------------------------- */
-const copyBtn = document.getElementById('copyEmail');
-const copyStatus = document.getElementById('copyStatus');
-
-if(copyBtn){
-  copyBtn.addEventListener('click', async () => {
-    let ok = false;
-    try{
-      await navigator.clipboard.writeText(EMAIL);
-      ok = true;
-    }catch(e){}
-    if(copyStatus){
-      copyStatus.textContent = ok ? t('contact.copied') : t('contact.copyFail') + EMAIL;
-      setTimeout(() => { copyStatus.textContent = ''; }, 4000);
-    }
-  });
-}
-
-/* ----------------------------------------------------------
-   Stats GitHub : affichées uniquement si l'API répond
-   ---------------------------------------------------------- */
-(async function loadGithubStats(){
-  const box = document.getElementById('ghStats');
-  if(!box) return;
-  const chart = document.getElementById('ghChart');
-  if(chart) chart.addEventListener('error', () => chart.remove());
-
-  const ctrl = new AbortController();
-  const timer = setTimeout(() => ctrl.abort(), 6000);
-  try{
-    const [userRes, reposRes] = await Promise.all([
-      fetch(`https://api.github.com/users/${GH_USER}`, { signal: ctrl.signal }),
-      fetch(`https://api.github.com/users/${GH_USER}/repos?per_page=100`, { signal: ctrl.signal })
-    ]);
-    if(!userRes.ok || !reposRes.ok) throw new Error('GitHub API ' + userRes.status);
-    const user = await userRes.json();
-    const repos = await reposRes.json();
-    const stars = Array.isArray(repos) ? repos.reduce((sum, r) => sum + (r.stargazers_count || 0), 0) : 0;
-    const fmt = (n) => Number(n || 0).toLocaleString(root.lang);
-
-    document.getElementById('ghRepos').textContent = fmt(user.public_repos);
-    document.getElementById('ghFollowers').textContent = fmt(user.followers);
-    document.getElementById('ghStars').textContent = fmt(stars);
-    box.hidden = false;
-  }catch(e){
-    // API indisponible ou quota atteint : le bloc reste masqué
-  }finally{
-    clearTimeout(timer);
+  /* ---------------------------------------------------------------
+     Thème : sombre par défaut, clair au choix (mémorisé)
+     --------------------------------------------------------------- */
+  const themeMeta = document.querySelector('meta[name="theme-color"]');
+  function applyTheme(theme){
+    if(theme === 'light') root.dataset.theme = 'light'; else delete root.dataset.theme;
+    themeMeta.setAttribute('content', theme === 'light' ? '#f6f7fb' : '#060a18');
+    document.dispatchEvent(new CustomEvent('themechange'));
   }
-})();
+  applyTheme(root.dataset.theme);
+  document.querySelector('.theme-btn').addEventListener('click', () => {
+    const next = root.dataset.theme === 'light' ? 'dark' : 'light';
+    applyTheme(next);
+    try{ localStorage.setItem('fn-theme', next); }catch(e){}
+  });
 
-/* ----------------------------------------------------------
-   Langue initiale : ?lang=en, sinon préférence enregistrée
-   ---------------------------------------------------------- */
-(function initLang(){
-  const param = new URLSearchParams(window.location.search).get('lang');
-  let saved = null;
-  try{ saved = localStorage.getItem('fn-lang'); }catch(e){}
-  const lang = param || saved;
-  if(lang === 'en') setLang('en');
+  /* ---------------------------------------------------------------
+     Langue : pages statiques /  et /en/, bascule instantanée en JS
+     --------------------------------------------------------------- */
+  const pageLang = root.lang === 'en' ? 'en' : 'fr';
+  let currentLang = pageLang;
+  const pathFor = lang => lang === 'en' ? '/en/' : '/';
+
+  async function getDict(lang){
+    if(!dicts[lang]){
+      const res = await fetch(`/assets/i18n/${lang}.json`);
+      if(!res.ok) throw new Error('i18n ' + res.status);
+      dicts[lang] = await res.json();
+    }
+    return dicts[lang];
+  }
+
+  function applyDict(dict){
+    root.lang = dict['meta.lang'];
+    document.title = dict['meta.title'];
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+      const key = el.dataset.i18n;
+      if(!(key in dict)) return;
+      if(key.endsWith('.html')) el.innerHTML = dict[key]; else el.textContent = dict[key];
+    });
+    document.querySelectorAll('[data-i18n-attr]').forEach(el => {
+      el.dataset.i18nAttr.split(';').forEach(pair => {
+        const [name, key] = pair.split('=');
+        if(key in dict) el.setAttribute(name, dict[key]);
+      });
+    });
+  }
+
+  async function setLang(lang, { push = true } = {}){
+    if(lang === currentLang) return;
+    try{
+      const dict = await getDict(lang);
+      const swap = () => applyDict(dict);
+      if(document.startViewTransition && !reducedMotion) document.startViewTransition(swap); else swap();
+      currentLang = lang;
+      if(push) history.pushState({ lang }, '', pathFor(lang) + location.hash);
+      document.dispatchEvent(new CustomEvent('langchange', { detail: lang }));
+    }catch(e){
+      location.href = pathFor(lang); // repli : navigation classique
+    }
+  }
+
+  document.querySelectorAll('.lang a').forEach(a => {
+    a.addEventListener('click', e => {
+      e.preventDefault();
+      const lang = a.dataset.lang;
+      try{ localStorage.setItem('fn-lang', lang); }catch(err){}
+      setLang(lang);
+    });
+  });
+  window.addEventListener('popstate', () => setLang(location.pathname.startsWith('/en') ? 'en' : 'fr', { push: false }));
+
+  // Langue initiale : préférence mémorisée, sinon langue du navigateur (page d'accueil FR seulement)
+  (function initLang(){
+    const isBot = /bot|crawl|spider|slurp|lighthouse|headless/i.test(navigator.userAgent) || navigator.webdriver;
+    if(isBot) return;
+    let saved = null;
+    try{ saved = localStorage.getItem('fn-lang'); }catch(e){}
+    if(pageLang === 'fr' && !location.search.includes('lang=fr')){
+      const browserEn = (navigator.languages || [navigator.language]).some((l, i) => i === 0 && /^en\b/i.test(l));
+      const target = saved || (browserEn ? 'en' : null);
+      if(target === 'en'){
+        getDict('en').then(dict => {
+          applyDict(dict); currentLang = 'en';
+          history.replaceState({ lang: 'en' }, '', '/en/' + location.hash);
+        }).catch(() => {});
+      }
+    }
+    // Précharge l'autre langue quand le navigateur est inactif
+    const other = pageLang === 'en' ? 'fr' : 'en';
+    idle(() => getDict(other).catch(() => {}), 2500);
+  })();
+  const t = key => (dicts[currentLang] || {})[key];
+
+  /* ---------------------------------------------------------------
+     Contact : copier l'email
+     --------------------------------------------------------------- */
+  const copyBtn = document.querySelector('.copy-btn');
+  const copyStatus = document.querySelector('.copy-status');
+  copyBtn.addEventListener('click', async () => {
+    const dict = await getDict(currentLang).catch(() => ({}));
+    let ok = false;
+    try{ await navigator.clipboard.writeText(copyBtn.dataset.email); ok = true; }catch(e){}
+    copyStatus.textContent = (ok ? dict['contact.copied'] : dict['contact.copyFail']) || copyBtn.dataset.email;
+    copyBtn.classList.toggle('is-done', ok);
+    clearTimeout(copyBtn._timer);
+    copyBtn._timer = setTimeout(() => { copyStatus.textContent = ''; copyBtn.classList.remove('is-done'); }, 4000);
+  });
+
+  /* ---------------------------------------------------------------
+     Stats GitHub en direct : bloc affiché seulement si l'API répond
+     --------------------------------------------------------------- */
+  (function githubStats(){
+    const box = document.querySelector('.gh');
+    if(!box) return;
+    const run = async () => {
+      const ctrl = new AbortController();
+      const timer = setTimeout(() => ctrl.abort(), 6000);
+      try{
+        const [u, r] = await Promise.all([
+          fetch(`https://api.github.com/users/${GH_USER}`, { signal: ctrl.signal }),
+          fetch(`https://api.github.com/users/${GH_USER}/repos?per_page=100&sort=pushed`, { signal: ctrl.signal })
+        ]);
+        if(!u.ok || !r.ok) return;
+        const user = await u.json();
+        const repos = await r.json();
+        if(!Array.isArray(repos)) return;
+        const stars = repos.reduce((s, x) => s + (x.stargazers_count || 0), 0);
+        const last = repos.map(x => x.pushed_at).filter(Boolean).sort().pop();
+        const set = (k, v) => { const el = box.querySelector(`[data-gh="${k}"]`); if(el) el.textContent = v; };
+        const fmtNum = n => Number(n || 0).toLocaleString(root.lang);
+        set('repos', fmtNum(user.public_repos));
+        set('followers', fmtNum(user.followers));
+        set('stars', fmtNum(stars));
+        set('updated', last ? new Date(last).toLocaleDateString(root.lang, { day: '2-digit', month: '2-digit', year: 'numeric' }) : '—');
+        box.hidden = false;
+      }catch(e){
+        // API indisponible, quota atteint ou délai dépassé : le bloc reste masqué
+      }finally{
+        clearTimeout(timer);
+      }
+    };
+    // Ne lance la requête que lorsque la section Contact approche
+    const io = new IntersectionObserver(entries => {
+      if(entries.some(e => e.isIntersecting)){ io.disconnect(); run(); }
+    }, { rootMargin: '400px' });
+    io.observe(document.getElementById('contact'));
+  })();
+
+  /* ---------------------------------------------------------------
+     Projets : panneau de détail (dialog). Sans JS, <details> suffit.
+     --------------------------------------------------------------- */
+  (function projectPanel(){
+    if(typeof HTMLDialogElement !== 'function') return;
+    const panel = document.createElement('dialog');
+    panel.className = 'panel';
+    panel.setAttribute('aria-labelledby', 'panel-title');
+    document.body.appendChild(panel);
+    let opener = null;
+
+    function open(card){
+      opener = card.querySelector('summary');
+      const tag = card.querySelector('.card-tag');
+      const title = card.querySelector('h4');
+      const desc = card.querySelector(':scope > p:not(.card-tag)');
+      const chips = card.querySelector(':scope > .chips');
+      const body = card.querySelector('.more-body');
+      panel.innerHTML = `
+        <button class="panel-close" type="button" aria-label="${root.lang === 'en' ? 'Close' : 'Fermer'}">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+        </button>
+        <p class="card-tag">${tag ? tag.innerHTML : ''}</p>
+        <h3 id="panel-title">${title ? title.innerHTML : ''}</h3>
+        <p class="panel-desc">${desc ? desc.innerHTML : ''}</p>
+        ${body ? body.innerHTML : ''}
+        ${chips ? chips.outerHTML : ''}`;
+      panel.querySelector('.panel-close').addEventListener('click', () => panel.close());
+      panel.showModal();
+      document.dispatchEvent(new CustomEvent('panel', { detail: true }));
+    }
+
+    panel.addEventListener('close', () => {
+      document.dispatchEvent(new CustomEvent('panel', { detail: false }));
+      if(opener) opener.focus();
+    });
+    panel.addEventListener('click', e => { if(e.target === panel) panel.close(); }); // clic sur le fond
+
+    document.querySelectorAll('.card .more summary').forEach(summary => {
+      summary.addEventListener('click', e => {
+        e.preventDefault();
+        open(summary.closest('.card'));
+      });
+    });
+  })();
+
+  /* ---------------------------------------------------------------
+     Lueur qui suit le curseur + inclinaison 3D légère
+     --------------------------------------------------------------- */
+  if(finePointer && !reducedMotion){
+    document.querySelectorAll('.tile, .card').forEach(el => {
+      const tilt = el.classList.contains('card');
+      el.addEventListener('pointermove', e => {
+        const r = el.getBoundingClientRect();
+        const x = (e.clientX - r.left) / r.width, y = (e.clientY - r.top) / r.height;
+        el.style.setProperty('--mx', `${x * 100}%`);
+        el.style.setProperty('--my', `${y * 100}%`);
+        if(tilt) el.style.transform = `perspective(900px) rotateX(${(0.5 - y) * 5}deg) rotateY(${(x - 0.5) * 6}deg) translateY(-2px)`;
+      });
+      if(tilt) el.addEventListener('pointerleave', () => { el.style.transform = ''; });
+    });
+  }
+
+  /* ---------------------------------------------------------------
+     Chargement différé des animations (GSAP, Lenis) et du canvas
+     --------------------------------------------------------------- */
+  function loadScript(src){
+    return new Promise((resolve, reject) => {
+      const s = document.createElement('script');
+      s.src = src; s.async = false;
+      s.onload = resolve; s.onerror = reject;
+      document.head.appendChild(s);
+    });
+  }
+
+  function revealAll(){ root.classList.remove('motion'); }
+
+  if(root.classList.contains('motion')){
+    // Filet de sécurité : si les animations ne démarrent pas, tout s'affiche
+    const safety = setTimeout(revealAll, 3500);
+    const libs = ['/assets/vendor/gsap.min.js', '/assets/vendor/ScrollTrigger.min.js', '/assets/vendor/SplitText.min.js'];
+    if(finePointer) libs.push('/assets/vendor/lenis.min.js');
+    Promise.all(libs.map(loadScript))
+      .then(() => loadScript('/assets/js/motion.js'))
+      .then(() => clearTimeout(safety))
+      .catch(revealAll);
+  }
+
+  if(!reducedMotion){
+    const startCanvas = () => loadScript('/assets/js/hero-canvas.js').catch(() => {});
+    if(document.readyState === 'complete') idle(startCanvas, 300);
+    else window.addEventListener('load', () => idle(startCanvas, 300));
+  }
+
+  window.FN = { t, getLang: () => currentLang };
 })();
