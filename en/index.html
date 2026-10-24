@@ -145,22 +145,33 @@
         <a class="btn btn-accent magnetic" href="#projets"><span data-i18n="cta.projects">View my projects</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
         <a class="btn btn-glass magnetic" data-i18n-attr="href=cv.href" download href="/assets/cv-fleury-niyokwizera-en.pdf"><span data-i18n="cta.cv">Download my CV</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v12M6 11l6 6 6-6M5 20h14"/></svg></a>
       </div>
+
+        <div class="hx-live">
+          <p class="hx-live-title"><span class="pulse" aria-hidden="true"></span><span data-i18n="hx.live.title">Live</span></p>
+          <ul class="hx-live-sites">
+            <li data-site="https://halalopenfoodfacts.org"><span class="hx-dot" aria-hidden="true"></span><span>halalopenfoodfacts.org</span><span class="sr-only"></span><span class="hx-live-val"></span></li>
+            <li data-site="https://halalopenbeautyfacts.org"><span class="hx-dot" aria-hidden="true"></span><span>halalopenbeautyfacts.org</span><span class="sr-only"></span><span class="hx-live-val"></span></li>
+          </ul>
+          <ul class="hx-live-gh"></ul>
+        </div>
     </div>
 
     <!-- Visuel : photo détourée + conversation -->
     <div class="hx-visual">
+      <div class="hx-spot" aria-hidden="true"></div>
       <figure class="hx-photo" data-depth="18">
         <div class="hx-blob" aria-hidden="true"></div>
         <div class="hx-halo" aria-hidden="true"></div>
         <picture>
-          <source type="image/avif" srcset="/assets/img/fleury-cut-360.avif 360w, /assets/img/fleury-cut-640.avif 640w" sizes="(min-width: 1100px) 440px, (min-width: 700px) 320px, 132px">
-          <source type="image/webp" srcset="/assets/img/fleury-cut-360.webp 360w, /assets/img/fleury-cut-640.webp 640w" sizes="(min-width: 1100px) 440px, (min-width: 700px) 320px, 132px">
+          <source type="image/avif" srcset="/assets/img/fleury-cut-360.avif 360w, /assets/img/fleury-cut-640.avif 640w" sizes="(min-width: 1100px) 150px, (min-width: 700px) 128px, 96px">
+          <source type="image/webp" srcset="/assets/img/fleury-cut-360.webp 360w, /assets/img/fleury-cut-640.webp 640w" sizes="(min-width: 1100px) 150px, (min-width: 700px) 128px, 96px">
           <img src="/assets/img/fleury-cut-640.png" width="640" height="640" fetchpriority="high" data-i18n-attr="alt=hx.photoAlt" alt="Portrait of Fleury Niyokwizera">
         </picture>
       </figure>
 
       <!-- Conversation : premier échange visible sans JS -->
       <div class="hx-chat glass" data-depth="-10" role="region" data-i18n-attr="aria-label=hx.chat.label" aria-label="Interactive demo of Halal Assistant">
+        <span class="hx-beam" aria-hidden="true"><span></span></span>
         <div class="hx-chat-head">
           <span class="chat-dot" aria-hidden="true"></span>
           <strong>Halal Assistant</strong>
@@ -198,29 +209,7 @@
         <li><p class="hx-num"><span class="hx-count" data-to="99.5" data-dec="1" data-i18n="kpi.k5.v">99.5</span><span data-i18n="kpi.k5.u">%</span></p><p data-i18n="hx.c4">availability</p></li>
       </ul>
 
-      <div class="hx-live glass" hidden>
-        <p class="hx-live-title"><span class="pulse" aria-hidden="true"></span><span data-i18n="hx.live.title">Live</span></p>
-        <ul class="hx-live-sites">
-          <li data-site="https://halalopenfoodfacts.org"><span class="hx-dot" aria-hidden="true"></span><span>halalopenfoodfacts.org</span><span class="sr-only"></span><span class="hx-live-val"></span></li>
-          <li data-site="https://halalopenbeautyfacts.org"><span class="hx-dot" aria-hidden="true"></span><span>halalopenbeautyfacts.org</span><span class="sr-only"></span><span class="hx-live-val"></span></li>
-        </ul>
-        <ul class="hx-live-gh" hidden></ul>
-      </div>
     </div>
-  </div>
-
-  <!-- Bandeau des technologies -->
-  <div class="hx-marquee" data-i18n-attr="aria-label=hx.tech.label" role="region" aria-label="Technologies I use">
-    <ul class="hx-track">
-      <li><svg aria-hidden="true"><use href="/assets/img/tech.svg#python"/></svg>Python</li>
-      <li><svg aria-hidden="true"><use href="/assets/img/tech.svg#pyspark"/></svg>PySpark</li>
-      <li><svg aria-hidden="true"><use href="/assets/img/tech.svg#django"/></svg>Django</li>
-      <li><svg aria-hidden="true"><use href="/assets/img/tech.svg#postgresql"/></svg>PostgreSQL</li>
-      <li><svg aria-hidden="true"><use href="/assets/img/tech.svg#docker"/></svg>Docker</li>
-      <li><svg aria-hidden="true"><use href="/assets/img/tech.svg#redis"/></svg>Redis</li>
-      <li><svg aria-hidden="true"><use href="/assets/img/tech.svg#pgvector"/></svg>pgvector</li>
-      <li><svg aria-hidden="true"><use href="/assets/img/tech.svg#celery"/></svg>Celery</li>
-    </ul>
   </div>
 
   <!-- Échanges scénarisés (données réelles de la base, relevées en octobre 2026) -->

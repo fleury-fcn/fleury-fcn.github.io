@@ -1,8 +1,8 @@
 // Hero : compteurs, phrase changeante, conversation Halal Assistant,
-// recherche réelle dans la base, bloc « en direct », parallaxe, bandeau.
+// recherche dans la base, bloc « en direct », parallaxe.
 // Sans JS, le hero reste complet (premier échange visible, formulaire
 // qui ouvre la vraie recherche du site). Mouvement réduit : pas de boucle,
-// pas de frappe, pas de parallaxe ni de défilement.
+// pas de frappe, pas de parallaxe.
 
 (function(){
   'use strict';
@@ -323,7 +323,7 @@
         val.textContent = d['hx.live.offline'];
       }
     }));
-    box.hidden = false;
+    box.classList.add('is-ready');
 
     try{
       const events = await fetchJSON(`https://api.github.com/users/${GH_USER}/events/public?per_page=20`);
@@ -348,7 +348,7 @@
         li.append((lang() === 'fr' ? 'GitHub : ' : 'GitHub: ') + before, a, after || '', ' ', time);
         return li;
       }));
-      ul.hidden = false;
+      ul.classList.add('is-ready');
     }catch(e){
       // API GitHub indisponible ou quota atteint : la ligne reste masquée
     }
@@ -379,19 +379,4 @@
     hero.addEventListener('pointerleave', () => { tx = 0; ty = 0; if(!raf) raf = requestAnimationFrame(tick); });
   }
 
-  /* ------------------------------------------------------------------
-     6. Bandeau des technologies : défilement continu
-     ------------------------------------------------------------------ */
-  if(!reduced){
-    const marquee = hero.querySelector('.hx-marquee');
-    const track = marquee && marquee.querySelector('.hx-track');
-    if(track){
-      [...track.children].forEach(li => {
-        const clone = li.cloneNode(true);
-        clone.setAttribute('aria-hidden', 'true');
-        track.appendChild(clone);
-      });
-      marquee.classList.add('is-running');
-    }
-  }
 })();

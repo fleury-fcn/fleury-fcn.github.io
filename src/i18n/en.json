@@ -71,7 +71,6 @@
   "hx.gh.push": "push to {repo}",
   "hx.gh.create": "created in {repo}",
   "hx.gh.other": "activity on {repo}",
-  "hx.tech.label": "Technologies I use",
   "about.eyebrow": "About",
   "about.title.html": "I build the data chain <em>end to end.</em>",
   "about.p1": "I am a Data Engineer. Ingestion, modeling, deployment, reporting: I own the whole chain, and I measure it.",

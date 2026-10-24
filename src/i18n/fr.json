@@ -71,7 +71,6 @@
   "hx.gh.push": "push sur {repo}",
   "hx.gh.create": "création dans {repo}",
   "hx.gh.other": "activité sur {repo}",
-  "hx.tech.label": "Technologies utilisées",
   "about.eyebrow": "À propos",
   "about.title.html": "Je construis la chaîne data <em>de bout en bout.</em>",
   "about.p1": "Je suis Data Engineer. Ingestion, modélisation, mise en production, restitution : je prends en charge toute la chaîne, et je la mesure.",
