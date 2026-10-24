@@ -91,6 +91,16 @@ const fonts = [
 ];
 for (const f of fonts) copyFileSync(f, `assets/fonts/${f.split('/').pop()}`);
 
+// Sprite des logos de technologies (Simple Icons, CC0) pour le bandeau du hero
+const si = await import('simple-icons');
+const logos = { python: 'siPython', pyspark: 'siApachespark', django: 'siDjango', postgresql: 'siPostgresql', docker: 'siDocker', redis: 'siRedis', celery: 'siCelery' };
+let sprite = '<svg xmlns="http://www.w3.org/2000/svg">';
+for (const [id, key] of Object.entries(logos)) sprite += `<symbol id="${id}" viewBox="0 0 24 24"><path d="${si[key].path}"/></symbol>`;
+// pgvector n'a pas de logo officiel : icône générique (axes + vecteur)
+sprite += '<symbol id="pgvector" viewBox="0 0 24 24"><path d="M3 21V3h2v16h16v2H3zm5.3-4.3-1.4-1.4L15.6 6.6H11V4.6h8v8h-2V8L8.3 16.7z"/></symbol>';
+sprite += '</svg>';
+writeFileSync('assets/img/tech.svg', sprite);
+
 // Sitemap
 const today = new Date().toISOString().slice(0, 10);
 const alt = `
