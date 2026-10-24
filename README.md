@@ -18,10 +18,12 @@ A static site served by GitHub Pages from `main`, with no framework.
 
 - **Two real pages**: `/` (French) and `/en/` (English), generated from one template. The language switch is instant with JavaScript and falls back to a normal link without it. The chosen language is remembered, and English-speaking browsers get the English page on their first visit.
 - **Design**: dark theme by default (navy and electric lime) with a light theme, Instrument Serif for headings, Geist for text. All fonts are self-hosted.
-- **Motion**: generative hero canvas (noise turning into signal), masked title reveals, scroll reveals, counters, animated chat demo and architecture diagram, scroll-drawn timeline, 3D card tilt, custom cursor, smooth scroll. GSAP, ScrollTrigger, SplitText and Lenis load only when motion is allowed. Mobile gets lighter effects.
+- **Hero**: headline result (4.5M+ products synced in 55 min instead of 9 h) with an animated gradient, typewriter line, count-up figures, an interactive Halal Assistant demo, a live block (both sites' status from their public `/proxy/stats` endpoint, latest public GitHub activity), a cut-out portrait with mouse parallax, an interactive node network and a technology marquee (logos from Simple Icons, CC0).
+- **Halal Assistant demo**: three scripted exchanges built from real product records (links open the real records). The real agent API is not called (cross-origin POST is blocked and would spend the LLM quota). Visitor questions about milk, Chamallow or sweets replay the matching exchange; other questions link to the real search on halalopenfoodfacts.org. A live product search is already coded in `assets/js/hero.js` behind `LIVE_SEARCH = false`: enable it once `/proxy/v2/search` and `/proxy/v2/product` send `Access-Control-Allow-Origin: https://fleury-fcn.github.io`.
+- **Motion**: masked title reveals, scroll reveals, counters, animated chat demo and architecture diagram, scroll-drawn timeline, 3D card tilt, custom cursor, smooth scroll. GSAP, ScrollTrigger, SplitText and Lenis load only when motion is allowed. Mobile gets lighter effects.
 - **Accessibility**: semantic HTML, AA contrast in both themes, visible focus, skip link, `prefers-reduced-motion` respected (no canvas or heavy animation), all content readable without JavaScript.
 - **SEO**: title, description, canonical, hreflang, Open Graph and Twitter images per language, `Person` structured data, `sitemap.xml`, `robots.txt`.
-- **Lighthouse (mobile)**: Performance 91–92, Accessibility 100, Best Practices 100, SEO 100.
+- **Lighthouse (mobile, gzip as on GitHub Pages)**: Performance 97, Accessibility 100, Best Practices 100, SEO 100.
 
 ## 📁 Structure
 
@@ -40,7 +42,8 @@ A static site served by GitHub Pages from `main`, with no framework.
 │   ├── css/style.css          # Design system (CSS variables) and layout
 │   ├── js/main.js             # Always loaded: nav, theme, language, contact, GitHub stats, project panel
 │   ├── js/motion.js           # Loaded on demand: GSAP animations, smooth scroll, cursor
-│   ├── js/hero-canvas.js      # Loaded on idle: hero background
+│   ├── js/hero.js             # Hero: counters, typewriter, assistant demo, live block, parallax, marquee
+│   ├── js/hero-canvas.js      # Loaded on idle: hero node network
 │   ├── i18n/                  # GENERATED — dictionaries for the instant language switch
 │   ├── vendor/, fonts/        # GENERATED — copied from node_modules
 │   ├── img/                   # Optimised images, favicon, OG images

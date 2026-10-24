@@ -120,21 +120,113 @@
 <main id="main">
 
 <!-- ============================ ACCUEIL ============================ -->
-<section id="accueil" class="hero">
-  <canvas class="hero-canvas" aria-hidden="true"></canvas>
-  <div class="hero-glow" aria-hidden="true"></div>
-  <div class="wrap hero-inner">
-    <p class="pill"><span class="pulse" aria-hidden="true"></span><span data-i18n="hero.status">Work-study or internship · from November 2026</span></p>
-    <h1 class="hero-title" data-i18n="hero.title.html"><span class="l"><span>Millions of rows.</span></span> <span class="l"><span><em>One</em> reliable answer.</span></span></h1>
-    <p class="hero-id" data-i18n="hero.id.html"><strong>Fleury Niyokwizera</strong> · Data Engineer · Master 1 in Data Modeling, Université de Lille</p>
-    <p class="hero-lead" data-i18n="hero.lead">I designed and ran two open source data platforms in production: 4.5M+ products, from ingestion to infrastructure. Then I plugged an AI agent into them.</p>
-    <div class="hero-actions">
-      <a class="btn btn-accent magnetic" href="#projets"><span data-i18n="cta.projects">View my projects</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-      <a class="btn btn-glass magnetic" data-i18n-attr="href=cv.href" download href="/assets/cv-fleury-niyokwizera-en.pdf"><span data-i18n="cta.cv">Download my CV</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v12M6 11l6 6 6-6M5 20h14"/></svg></a>
-      <a class="btn btn-ghost magnetic" href="#contact" data-i18n="cta.contact">Contact me</a>
+<section id="accueil" class="hx" aria-labelledby="hx-title">
+  <canvas class="hx-canvas" aria-hidden="true"></canvas>
+  <div class="hx-aura" aria-hidden="true"></div>
+
+  <div class="wrap hx-grid">
+    <!-- Texte -->
+    <div class="hx-text">
+      <ul class="hx-badges" data-i18n-attr="aria-label=hx.badges.label" aria-label="Highlights">
+        <li><span class="hx-badge-dot" aria-hidden="true"></span><span data-i18n="hx.badge1">Chief Engineer, E-halal</span></li>
+        <li data-i18n="hx.badge2">Master's, Université de Lille</li>
+        <li class="hx-badge-on"><span class="pulse" aria-hidden="true"></span><span data-i18n="hx.badge3">Available for work-study</span></li>
+      </ul>
+
+      <p class="hx-name" data-i18n="hx.name.html"><strong>Fleury Niyokwizera</strong> · Data Engineer</p>
+      <h1 id="hx-title" class="hx-title" data-i18n="hx.title.html">4.5M+ products synced in <span class="hx-grad" data-text="55 min">55 min</span> instead of 9 h.</h1>
+
+      <p class="hx-rotator">
+        <span class="sr-only" data-i18n="hx.rot.full">I build data pipelines, AI agents and open source platforms.</span>
+        <span aria-hidden="true"><span data-i18n="hx.rot.prefix">I build</span> <span class="hx-rot-word" data-i18n-attr="data-words=hx.rot.words" data-i18n="hx.rot.w1" data-words="data pipelines|AI agents|open source platforms">data pipelines</span><span class="hx-caret"></span></span>
+      </p>
+
+      <div class="hx-actions">
+        <a class="btn btn-accent magnetic" href="#projets"><span data-i18n="cta.projects">View my projects</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        <a class="btn btn-glass magnetic" data-i18n-attr="href=cv.href" download href="/assets/cv-fleury-niyokwizera-en.pdf"><span data-i18n="cta.cv">Download my CV</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v12M6 11l6 6 6-6M5 20h14"/></svg></a>
+      </div>
+    </div>
+
+    <!-- Visuel : photo détourée + conversation -->
+    <div class="hx-visual">
+      <figure class="hx-photo" data-depth="18">
+        <div class="hx-blob" aria-hidden="true"></div>
+        <div class="hx-halo" aria-hidden="true"></div>
+        <picture>
+          <source type="image/avif" srcset="/assets/img/fleury-cut-360.avif 360w, /assets/img/fleury-cut-640.avif 640w" sizes="(min-width: 1100px) 440px, (min-width: 700px) 320px, 132px">
+          <source type="image/webp" srcset="/assets/img/fleury-cut-360.webp 360w, /assets/img/fleury-cut-640.webp 640w" sizes="(min-width: 1100px) 440px, (min-width: 700px) 320px, 132px">
+          <img src="/assets/img/fleury-cut-640.png" width="640" height="640" fetchpriority="high" data-i18n-attr="alt=hx.photoAlt" alt="Portrait of Fleury Niyokwizera">
+        </picture>
+      </figure>
+
+      <!-- Conversation : premier échange visible sans JS -->
+      <div class="hx-chat glass" data-depth="-10" role="region" data-i18n-attr="aria-label=hx.chat.label" aria-label="Interactive demo of Halal Assistant">
+        <div class="hx-chat-head">
+          <span class="chat-dot" aria-hidden="true"></span>
+          <strong>Halal Assistant</strong>
+          <span class="hx-chat-tag" data-i18n="hx.chat.tag">demo</span>
+        </div>
+        <p class="hx-chat-warn" data-i18n="ha.chat.warn">⚠ AI assistant, it can make mistakes. Check the product label.</p>
+
+        <div class="hx-chat-log" aria-live="polite">
+          <p class="msg msg-user hx-q" data-i18n="hx.q1">I want halal milk, what do you suggest?</p>
+          <div class="msg msg-bot hx-a" data-i18n="hx.a1.html"><p>I found 5 products for “halal milk”. Check the record before buying.</p><ul><li><strong>Goldium crémeux</strong>: <b class="st st-ok">compatible</b>, halal label declared by contributors, not verified. <a href="https://halalopenfoodfacts.org/product.html?code=6111259092495" target="_blank" rel="noopener">View record ↗</a></li><li><strong>Code 6111259092525</strong>: <b class="st st-warn">ambiguous</b>. Sensitive ingredient: rennet. <a href="https://halalopenfoodfacts.org/product.html?code=6111259092525" target="_blank" rel="noopener">View record ↗</a></li></ul></div>
+        </div>
+
+        <div class="hx-suggest">
+          <p class="hx-suggest-label" data-i18n="hx.suggest">Try:</p>
+          <button type="button" class="hx-chip" data-ex="1" data-i18n="hx.q1">I want halal milk, what do you suggest?</button>
+          <button type="button" class="hx-chip" data-ex="2" data-i18n="hx.q2">Are Chamallows halal?</button>
+          <button type="button" class="hx-chip" data-ex="3" data-i18n="hx.q3">Any sweets without pork or alcohol?</button>
+        </div>
+
+        <form class="hx-ask" action="https://halalopenfoodfacts.org/catalogue.html" method="get" target="_blank" rel="noopener">
+          <label class="sr-only" for="hx-input" data-i18n="hx.ask.label">Search a product in the real database</label>
+          <input id="hx-input" name="q" type="search" maxlength="80" autocomplete="off" data-i18n-attr="placeholder=hx.ask.placeholder" placeholder="Search a product: chocolate, sweets…">
+          <button type="submit" class="hx-send" data-i18n-attr="aria-label=hx.ask.send" aria-label="Search"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+        </form>
+        <p class="hx-chat-note" data-i18n="hx.chat.note">Demo: answers rebuilt from real product records. Links open the real records.</p>
+      </div>
+    </div>
+
+    <!-- Bas du hero : compteurs + direct -->
+    <div class="hx-bottom">
+      <ul class="hx-counters">
+        <li><p class="hx-num"><span class="hx-count" data-to="4.5" data-dec="1" data-i18n="kpi.k1.v">4.5</span><span data-i18n="kpi.k1.u">M+</span></p><p data-i18n="hx.c1">products synced</p></li>
+        <li><p class="hx-num"><span class="hx-count" data-to="350">350</span></p><p data-i18n="hx.c2">registered contributors</p></li>
+        <li><p class="hx-num"><span class="hx-count" data-to="12000" data-i18n="kpi.k3.v">12,000</span></p><p data-i18n="hx.c3">visitors per month</p></li>
+        <li><p class="hx-num"><span class="hx-count" data-to="99.5" data-dec="1" data-i18n="kpi.k5.v">99.5</span><span data-i18n="kpi.k5.u">%</span></p><p data-i18n="hx.c4">availability</p></li>
+      </ul>
+
+      <div class="hx-live glass" hidden>
+        <p class="hx-live-title"><span class="pulse" aria-hidden="true"></span><span data-i18n="hx.live.title">Live</span></p>
+        <ul class="hx-live-sites">
+          <li data-site="https://halalopenfoodfacts.org"><span class="hx-dot" aria-hidden="true"></span><span>halalopenfoodfacts.org</span><span class="sr-only"></span><span class="hx-live-val"></span></li>
+          <li data-site="https://halalopenbeautyfacts.org"><span class="hx-dot" aria-hidden="true"></span><span>halalopenbeautyfacts.org</span><span class="sr-only"></span><span class="hx-live-val"></span></li>
+        </ul>
+        <ul class="hx-live-gh" hidden></ul>
+      </div>
     </div>
   </div>
-  <a class="scroll-hint" href="#a-propos" data-i18n-attr="aria-label=a11y.scroll" aria-label="Scroll to About"><span></span></a>
+
+  <!-- Bandeau des technologies -->
+  <div class="hx-marquee" data-i18n-attr="aria-label=hx.tech.label" role="region" aria-label="Technologies I use">
+    <ul class="hx-track">
+      <li><svg aria-hidden="true"><use href="/assets/img/tech.svg#python"/></svg>Python</li>
+      <li><svg aria-hidden="true"><use href="/assets/img/tech.svg#pyspark"/></svg>PySpark</li>
+      <li><svg aria-hidden="true"><use href="/assets/img/tech.svg#django"/></svg>Django</li>
+      <li><svg aria-hidden="true"><use href="/assets/img/tech.svg#postgresql"/></svg>PostgreSQL</li>
+      <li><svg aria-hidden="true"><use href="/assets/img/tech.svg#docker"/></svg>Docker</li>
+      <li><svg aria-hidden="true"><use href="/assets/img/tech.svg#redis"/></svg>Redis</li>
+      <li><svg aria-hidden="true"><use href="/assets/img/tech.svg#pgvector"/></svg>pgvector</li>
+      <li><svg aria-hidden="true"><use href="/assets/img/tech.svg#celery"/></svg>Celery</li>
+    </ul>
+  </div>
+
+  <!-- Échanges scénarisés (données réelles de la base, relevées en octobre 2026) -->
+  <template id="hx-ex-1"><p data-role="q" data-i18n="hx.q1">I want halal milk, what do you suggest?</p><div data-role="a" data-i18n="hx.a1.html"><p>I found 5 products for “halal milk”. Check the record before buying.</p><ul><li><strong>Goldium crémeux</strong>: <b class="st st-ok">compatible</b>, halal label declared by contributors, not verified. <a href="https://halalopenfoodfacts.org/product.html?code=6111259092495" target="_blank" rel="noopener">View record ↗</a></li><li><strong>Code 6111259092525</strong>: <b class="st st-warn">ambiguous</b>. Sensitive ingredient: rennet. <a href="https://halalopenfoodfacts.org/product.html?code=6111259092525" target="_blank" rel="noopener">View record ↗</a></li></ul></div></template>
+  <template id="hx-ex-2"><p data-role="q" data-i18n="hx.q2">Are Chamallows halal?</p><div data-role="a" data-i18n="hx.a2.html"><p><strong>Chamallow</strong> (Haribo): <b class="st st-warn">doubtful</b>.</p><ul><li>Sensitive ingredient: gelatin of unspecified origin.</li><li>No verified halal certification.</li></ul><p>Check the packaging before buying. <a href="https://halalopenfoodfacts.org/product.html?code=3103220046159" target="_blank" rel="noopener">View record ↗</a></p></div></template>
+  <template id="hx-ex-3"><p data-role="q" data-i18n="hx.q3">Any sweets without pork or alcohol?</p><div data-role="a" data-i18n="hx.a3.html"><p>Two <b class="st st-ok">compatible</b> examples based on the ingredients:</p><ul><li><strong>Dragibus</strong> (Haribo): no alcohol or pork in the ingredients. <a href="https://halalopenfoodfacts.org/product.html?code=3103220040409" target="_blank" rel="noopener">View record ↗</a></li><li><strong>Scoubidou</strong> (Lutti): no alcohol or pork in the ingredients. <a href="https://halalopenfoodfacts.org/product.html?code=3116740027317" target="_blank" rel="noopener">View record ↗</a></li></ul><p>No verified certification, and recipes can change: check the packaging.</p></div></template>
 </section>
 
 <!-- ============================ À PROPOS ============================ -->
@@ -589,5 +681,6 @@
 </footer>
 
 <script src="/assets/js/main.js" defer></script>
+<script src="/assets/js/hero.js" defer></script>
 </body>
 </html>
