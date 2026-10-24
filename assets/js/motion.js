@@ -36,9 +36,9 @@
   });
 
   // Le hero s'estompe légèrement en quittant l'écran (parallaxe)
-  gsap.to('.hero-inner', {
-    yPercent: -12, opacity: 0.2, ease: 'none',
-    scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true }
+  gsap.to('.hx-grid', {
+    yPercent: -6, opacity: 0.35, ease: 'none',
+    scrollTrigger: { trigger: '.hx', start: 'top top', end: 'bottom top', scrub: true }
   });
 
   /* ---------------- Titres de section : lignes masquées ---------------- */

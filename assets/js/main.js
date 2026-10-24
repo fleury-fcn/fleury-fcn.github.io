@@ -79,11 +79,13 @@
   function applyDict(dict){
     root.lang = dict['meta.lang'];
     document.title = dict['meta.title'];
-    document.querySelectorAll('[data-i18n]').forEach(el => {
+    // Le document et le contenu des <template> (échanges du hero)
+    const scopes = [document, ...[...document.querySelectorAll('template')].map(t => t.content)];
+    scopes.forEach(scope => scope.querySelectorAll('[data-i18n]').forEach(el => {
       const key = el.dataset.i18n;
       if(!(key in dict)) return;
       if(key.endsWith('.html')) el.innerHTML = dict[key]; else el.textContent = dict[key];
-    });
+    }));
     document.querySelectorAll('[data-i18n-attr]').forEach(el => {
       el.dataset.i18nAttr.split(';').forEach(pair => {
         const [name, key] = pair.split('=');
@@ -97,7 +99,8 @@
     try{
       const dict = await getDict(lang);
       const swap = () => applyDict(dict);
-      if(document.startViewTransition && !reducedMotion) document.startViewTransition(swap); else swap();
+      if(document.startViewTransition && !reducedMotion) await document.startViewTransition(swap).updateCallbackDone;
+      else swap();
       currentLang = lang;
       if(push) history.pushState({ lang }, '', pathFor(lang) + location.hash);
       document.dispatchEvent(new CustomEvent('langchange', { detail: lang }));
@@ -129,6 +132,7 @@
         getDict('en').then(dict => {
           applyDict(dict); currentLang = 'en';
           history.replaceState({ lang: 'en' }, '', '/en/' + location.hash);
+          document.dispatchEvent(new CustomEvent('langchange', { detail: 'en' }));
         }).catch(() => {});
       }
     }
@@ -287,5 +291,5 @@
     else window.addEventListener('load', () => idle(startCanvas, 300));
   }
 
-  window.FN = { t, getLang: () => currentLang };
+  window.FN = { t, getDict, getLang: () => currentLang };
 })();
