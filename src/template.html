@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html data-i18n-attr="lang=meta.lang" class="no-js">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title data-i18n="meta.title"></title>
+<meta name="description" data-i18n-attr="content=meta.description">
+<link rel="canonical" data-i18n-attr="href=meta.url">
+<link rel="alternate" hreflang="fr" href="https://fleury-fcn.github.io/">
+<link rel="alternate" hreflang="en" href="https://fleury-fcn.github.io/en/">
+<link rel="alternate" hreflang="x-default" href="https://fleury-fcn.github.io/">
+
+<meta property="og:type" content="profile">
+<meta property="og:site_name" content="Fleury Niyokwizera">
+<meta property="og:url" data-i18n-attr="content=meta.url">
+<meta property="og:title" data-i18n-attr="content=meta.ogTitle">
+<meta property="og:description" data-i18n-attr="content=meta.ogDescription">
+<meta property="og:image" data-i18n-attr="content=meta.ogImage">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" data-i18n-attr="content=meta.ogImageAlt">
+<meta property="og:locale" data-i18n-attr="content=meta.ogLocale">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" data-i18n-attr="content=meta.ogTitle">
+<meta name="twitter:description" data-i18n-attr="content=meta.ogDescription">
+<meta name="twitter:image" data-i18n-attr="content=meta.ogImage">
+
+<meta name="color-scheme" content="dark light">
+<meta name="theme-color" content="#060a18">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png">
+
+<link rel="preload" href="/assets/fonts/geist-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/instrument-serif-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/assets/css/style.css">
+
+<script>
+  // Avant le rendu : JS actif, thème mémorisé, préférences de mouvement
+  (function(){
+    var d = document.documentElement;
+    d.classList.remove('no-js'); d.classList.add('js');
+    try{ var t = localStorage.getItem('fn-theme'); if(t) d.dataset.theme = t; }catch(e){}
+    if(window.matchMedia('(prefers-reduced-motion: reduce)').matches) d.classList.add('reduced-motion');
+    else d.classList.add('motion');
+  })();
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Fleury Niyokwizera",
+  "url": "https://fleury-fcn.github.io/",
+  "image": "https://fleury-fcn.github.io/assets/img/fleury-480.jpg",
+  "jobTitle": "Data Engineer",
+  "email": "mailto:fleuryniyokwizera2021@gmail.com",
+  "address": { "@type": "PostalAddress", "addressLocality": "Lille", "addressCountry": "FR" },
+  "affiliation": { "@type": "CollegeOrUniversity", "name": "Université de Lille" },
+  "alumniOf": { "@type": "CollegeOrUniversity", "name": "Institut de Statistique Appliquée (ISTA), Université du Burundi" },
+  "knowsAbout": ["Data Engineering", "PostgreSQL", "PySpark", "ETL", "Retrieval-Augmented Generation", "Machine Learning"],
+  "knowsLanguage": ["fr", "en"],
+  "sameAs": [
+    "https://github.com/fleury-fcn",
+    "https://www.linkedin.com/in/fleury-niyokwizera-2a9436291",
+    "https://www.instagram.com/fleuryniyokwizera"
+  ]
+}
+</script>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-WWS4LT1RR4"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-WWS4LT1RR4');
+</script>
+</head>
+<body>
+
+<a class="skip-link" href="#main" data-i18n="a11y.skip"></a>
+<div class="progress" aria-hidden="true"><span></span></div>
+<div class="cursor" aria-hidden="true"></div>
+
+<header class="header">
+  <nav class="nav wrap" data-i18n-attr="aria-label=a11y.nav">
+    <a class="brand" href="#accueil" data-i18n-attr="aria-label=a11y.home">
+      <span class="brand-mark" aria-hidden="true">FN</span>
+      <span class="brand-name">Fleury Niyokwizera</span>
+    </a>
+
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="menu" data-i18n-attr="aria-label=a11y.menu">
+      <span></span><span></span>
+    </button>
+
+    <div class="menu" id="menu">
+      <ul class="menu-links">
+        <li><a href="#accueil" data-i18n="nav.home"></a></li>
+        <li><a href="#a-propos" data-i18n="nav.about"></a></li>
+        <li><a href="#projets" data-i18n="nav.projects"></a></li>
+        <li><a href="#parcours" data-i18n="nav.path"></a></li>
+        <li><a href="#competences" data-i18n="nav.skills"></a></li>
+        <li><a href="#contact" data-i18n="nav.contact"></a></li>
+      </ul>
+      <div class="menu-tools">
+        <div class="lang" role="group" data-i18n-attr="aria-label=a11y.lang">
+          <a href="/" hreflang="fr" lang="fr" data-lang="fr" data-i18n-attr="aria-current=lang.frCurrent">FR</a>
+          <a href="/en/" hreflang="en" lang="en" data-lang="en" data-i18n-attr="aria-current=lang.enCurrent">EN</a>
+        </div>
+        <button class="theme-btn" type="button" data-i18n-attr="aria-label=a11y.theme">
+          <svg class="i-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+          <svg class="i-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+        </button>
+      </div>
+    </div>
+  </nav>
+</header>
+
+<main id="main">
+
+<!-- ============================ ACCUEIL ============================ -->
+<section id="accueil" class="hero">
+  <canvas class="hero-canvas" aria-hidden="true"></canvas>
+  <div class="hero-glow" aria-hidden="true"></div>
+  <div class="wrap hero-inner">
+    <p class="pill"><span class="pulse" aria-hidden="true"></span><span data-i18n="hero.status"></span></p>
+    <h1 class="hero-title" data-i18n="hero.title.html"></h1>
+    <p class="hero-id" data-i18n="hero.id.html"></p>
+    <p class="hero-lead" data-i18n="hero.lead"></p>
+    <div class="hero-actions">
+      <a class="btn btn-accent magnetic" href="#projets"><span data-i18n="cta.projects"></span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      <a class="btn btn-glass magnetic" data-i18n-attr="href=cv.href" download><span data-i18n="cta.cv"></span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v12M6 11l6 6 6-6M5 20h14"/></svg></a>
+      <a class="btn btn-ghost magnetic" href="#contact" data-i18n="cta.contact"></a>
+    </div>
+  </div>
+  <a class="scroll-hint" href="#a-propos" data-i18n-attr="aria-label=a11y.scroll"><span></span></a>
+</section>
+
+<!-- ============================ À PROPOS ============================ -->
+<section id="a-propos" class="section">
+  <div class="wrap">
+    <p class="eyebrow" data-i18n="about.eyebrow"></p>
+    <h2 class="title reveal-title" data-i18n="about.title.html"></h2>
+
+    <div class="about-grid">
+      <div class="about-text reveal">
+        <p data-i18n="about.p1"></p>
+        <p data-i18n="about.p2"></p>
+        <p data-i18n="about.p3"></p>
+      </div>
+      <figure class="about-photo reveal parallax">
+        <picture>
+          <source type="image/avif" srcset="/assets/img/fleury-desk-480.avif 480w, /assets/img/fleury-desk-800.avif 800w" sizes="(min-width: 960px) 360px, 80vw">
+          <source type="image/webp" srcset="/assets/img/fleury-desk-480.webp 480w, /assets/img/fleury-desk-800.webp 800w" sizes="(min-width: 960px) 360px, 80vw">
+          <img src="/assets/img/fleury-desk-800.jpg" width="800" height="1000" loading="lazy" decoding="async" data-i18n-attr="alt=about.photoAlt">
+        </picture>
+      </figure>
+      <aside class="seek glass reveal" data-i18n-attr="aria-label=about.seek.title">
+        <h3 data-i18n="about.seek.title"></h3>
+        <dl>
+          <div><dt data-i18n="about.seek.typeK"></dt><dd data-i18n="about.seek.typeV"></dd></div>
+          <div><dt data-i18n="about.seek.rolesK"></dt><dd data-i18n="about.seek.rolesV"></dd></div>
+          <div><dt data-i18n="about.seek.whereK"></dt><dd data-i18n="about.seek.whereV"></dd></div>
+          <div><dt data-i18n="about.seek.langK"></dt><dd data-i18n="about.seek.langV"></dd></div>
+        </dl>
+      </aside>
+    </div>
+
+    <h3 class="subtitle" data-i18n="kpi.title"></h3>
+    <p class="note" data-i18n="kpi.note"></p>
+    <ul class="bento kpis">
+      <li class="tile tile-xl glass reveal">
+        <p class="kpi"><span class="count" data-count="4.5" data-decimals="1" data-i18n="kpi.k1.v"></span><span data-i18n="kpi.k1.u"></span></p>
+        <p data-i18n="kpi.k1.l"></p>
+        <svg class="spark" viewBox="0 0 300 60" preserveAspectRatio="none" aria-hidden="true"><path d="M0 52 C40 50 60 44 90 40 S150 30 180 22 S240 10 300 6"/></svg>
+      </li>
+      <li class="tile glass reveal">
+        <p class="kpi"><span class="count" data-count="12000" data-i18n="kpi.k3.v"></span></p>
+        <p data-i18n="kpi.k3.l"></p>
+      </li>
+      <li class="tile glass reveal">
+        <p class="kpi"><span class="count" data-count="25000" data-i18n="kpi.k4.v"></span></p>
+        <p data-i18n="kpi.k4.l"></p>
+      </li>
+      <li class="tile glass reveal">
+        <p class="kpi"><span class="count" data-count="99.5" data-decimals="1" data-i18n="kpi.k5.v"></span><span data-i18n="kpi.k5.u"></span></p>
+        <p data-i18n="kpi.k5.l"></p>
+      </li>
+      <li class="tile glass reveal">
+        <p class="kpi"><span>&lt;&nbsp;</span><span class="count" data-count="300" data-i18n="kpi.k6.v"></span><span>&nbsp;ms</span></p>
+        <p data-i18n="kpi.k6.l"></p>
+      </li>
+      <li class="tile tile-wide tile-sync glass reveal">
+        <div>
+          <p class="kpi"><span data-i18n="kpi.k2.v"></span></p>
+          <p data-i18n="kpi.k2.l"></p>
+        </div>
+        <div class="sync-bars" aria-hidden="true">
+          <p><span data-i18n="kpi.k2.before"></span><span class="sync-bar"><i style="--w:100"></i></span><span>9&nbsp;h</span></p>
+          <p><span data-i18n="kpi.k2.after"></span><span class="sync-bar"><i style="--w:10.2"></i></span><span>55&nbsp;min</span></p>
+        </div>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<!-- ============================ PROJETS ============================ -->
+<section id="projets" class="section">
+  <div class="wrap">
+    <p class="eyebrow" data-i18n="proj.eyebrow"></p>
+    <h2 class="title reveal-title" data-i18n="proj.title.html"></h2>
+  </div>
+
+  <!-- Projet à la une : Halal Assistant -->
+  <article class="feature" aria-labelledby="ha-title">
+    <div class="wrap">
+      <div class="feature-head">
+        <p class="tag-accent" data-i18n="ha.kicker"></p>
+        <h3 id="ha-title" class="feature-title reveal-title" data-i18n="ha.title.html"></h3>
+        <p class="feature-lead reveal" data-i18n="ha.lead"></p>
+      </div>
+
+      <ul class="ha-metrics">
+        <li class="glass reveal"><p class="kpi"><span>&lt;&nbsp;</span><span class="count" data-count="3">3</span><span>&nbsp;s</span></p><p data-i18n="ha.m1"></p></li>
+        <li class="glass reveal"><p class="kpi"><span class="count" data-count="85">85</span><span data-i18n="kpi.k5.u"></span></p><p data-i18n="ha.m2"></p></li>
+        <li class="glass reveal"><p class="kpi"><span class="count" data-count="4.5" data-decimals="1" data-i18n="kpi.k1.v"></span><span data-i18n="kpi.k1.u"></span></p><p data-i18n="ha.m3"></p></li>
+      </ul>
+
+      <div class="ha-grid">
+        <!-- Démo de conversation -->
+        <figure class="chat glass reveal" data-i18n-attr="aria-label=ha.chat.label">
+          <div class="chat-head">
+            <span class="chat-dot" aria-hidden="true"></span>
+            <strong>Halal Assistant</strong>
+            <span class="chat-site">halalopenfoodfacts.org</span>
+          </div>
+          <p class="chat-warn" data-i18n="ha.chat.warn"></p>
+          <div class="chat-body">
+            <p class="msg msg-user" data-i18n="ha.chat.q"></p>
+            <div class="msg msg-typing" aria-hidden="true"><span></span><span></span><span></span></div>
+            <div class="msg msg-bot">
+              <p data-i18n="ha.chat.intro"></p>
+              <ul>
+                <li><span data-i18n="ha.chat.r1.html"></span> <span class="src" data-i18n="ha.chat.src"></span></li>
+                <li><span data-i18n="ha.chat.r2.html"></span> <span class="src" data-i18n="ha.chat.src"></span></li>
+                <li><span data-i18n="ha.chat.r3.html"></span> <span class="src" data-i18n="ha.chat.src"></span></li>
+              </ul>
+            </div>
+          </div>
+          <figcaption data-i18n="ha.chat.caption"></figcaption>
+        </figure>
+
+        <!-- Schéma d'architecture -->
+        <figure class="arch reveal" data-i18n-attr="aria-label=ha.arch.label">
+          <ol class="arch-flow">
+            <li class="node"><span class="node-ico" aria-hidden="true">01</span><strong data-i18n="ha.arch.n1"></strong><span data-i18n="ha.arch.n1s"></span></li>
+            <li class="node"><span class="node-ico" aria-hidden="true">02</span><strong data-i18n="ha.arch.n2"></strong><span data-i18n="ha.arch.n2s"></span></li>
+            <li class="node node-hot"><span class="node-ico" aria-hidden="true">03</span><strong data-i18n="ha.arch.n3"></strong><span data-i18n="ha.arch.n3s"></span></li>
+            <li class="node node-hot"><span class="node-ico" aria-hidden="true">04</span><strong data-i18n="ha.arch.n4"></strong><span data-i18n="ha.arch.n4s"></span></li>
+            <li class="node"><span class="node-ico" aria-hidden="true">05</span><strong data-i18n="ha.arch.n5"></strong><span data-i18n="ha.arch.n5s"></span></li>
+          </ol>
+          <figcaption data-i18n="ha.arch.caption"></figcaption>
+        </figure>
+      </div>
+
+      <div class="ha-details">
+        <div class="reveal">
+          <h4 data-i18n="ha.does.title"></h4>
+          <ul class="ticks">
+            <li data-i18n="ha.does.1"></li>
+            <li data-i18n="ha.does.2"></li>
+            <li data-i18n="ha.does.3"></li>
+            <li data-i18n="ha.does.4"></li>
+            <li data-i18n="ha.does.5"></li>
+          </ul>
+        </div>
+        <div class="reveal">
+          <h4 data-i18n="ha.guard.title"></h4>
+          <ul class="ticks">
+            <li data-i18n="ha.guard.1"></li>
+            <li data-i18n="ha.guard.2"></li>
+            <li data-i18n="ha.guard.3"></li>
+          </ul>
+          <h4 data-i18n="ha.stack.title"></h4>
+          <ul class="chips"><li>Python</li><li>RAG</li><li>pgvector</li><li>PostgreSQL</li><li>Claude</li><li>OpenRouter</li></ul>
+          <p class="links">
+            <a href="https://halalopenfoodfacts.org" target="_blank" rel="noopener">halalopenfoodfacts.org <span aria-hidden="true">↗</span></a>
+            <a href="https://halalopenbeautyfacts.org" target="_blank" rel="noopener">halalopenbeautyfacts.org <span aria-hidden="true">↗</span></a>
+            <a href="/assets/img/halal-assistant-hoff-1600.jpg" target="_blank" rel="noopener" data-i18n="ha.screenshot"></a>
+          </p>
+        </div>
+      </div>
+
+      <!-- La base en chiffres -->
+      <div class="db glass reveal">
+        <h4 data-i18n="db.title"></h4>
+        <p class="note" data-i18n="db.note"></p>
+        <div class="db-legend" aria-hidden="true">
+          <span class="lg lg-halal" data-i18n="db.halal"></span>
+          <span class="lg lg-nc" data-i18n="db.nc"></span>
+          <span class="lg lg-doubt" data-i18n="db.doubt"></span>
+          <span class="lg lg-na" data-i18n="db.na"></span>
+        </div>
+
+        <div class="db-row">
+          <p class="db-name">Halal Open Food Facts <span class="db-total" data-i18n="db.food.total"></span></p>
+          <div class="bar" aria-hidden="true">
+            <span class="seg seg-halal" style="--w:24.01"></span><span class="seg seg-nc" style="--w:2.25"></span><span class="seg seg-doubt" style="--w:2.45"></span><span class="seg seg-na" style="--w:71.29"></span>
+          </div>
+          <dl class="db-values">
+            <div><dt data-i18n="db.halal"></dt><dd data-i18n="db.food.halal"></dd></div>
+            <div><dt data-i18n="db.nc"></dt><dd data-i18n="db.food.nc"></dd></div>
+            <div><dt data-i18n="db.doubt"></dt><dd data-i18n="db.food.doubt"></dd></div>
+            <div><dt data-i18n="db.na"></dt><dd data-i18n="db.food.na"></dd></div>
+          </dl>
+        </div>
+
+        <div class="db-row">
+          <p class="db-name">Halal Open Beauty Facts <span class="db-total" data-i18n="db.beauty.total"></span></p>
+          <div class="bar" aria-hidden="true">
+            <span class="seg seg-halal" style="--w:21.93"></span><span class="seg seg-nc" style="--w:5.44"></span><span class="seg seg-doubt" style="--w:0.90"></span><span class="seg seg-na" style="--w:71.73"></span>
+          </div>
+          <dl class="db-values">
+            <div><dt data-i18n="db.halal"></dt><dd data-i18n="db.beauty.halal"></dd></div>
+            <div><dt data-i18n="db.nc"></dt><dd data-i18n="db.beauty.nc"></dd></div>
+            <div><dt data-i18n="db.doubt"></dt><dd data-i18n="db.beauty.doubt"></dd></div>
+            <div><dt data-i18n="db.na"></dt><dd data-i18n="db.beauty.na"></dd></div>
+          </dl>
+        </div>
+      </div>
+    </div>
+  </article>
+
+  <!-- Autres projets -->
+  <div class="wrap">
+    <h3 class="subtitle" data-i18n="proj.others"></h3>
+    <ul class="cards">
+      <!-- p1 -->
+      <li class="card glass reveal">
+        <p class="card-tag" data-i18n="p1.tag"></p>
+        <h4 data-i18n="p1.title"></h4>
+        <p data-i18n="p1.desc"></p>
+        <ul class="chips"><li>Django REST</li><li>PostgreSQL</li><li>Redis / Celery</li><li>Docker</li><li>Nginx</li><li>OVHcloud</li></ul>
+        <details class="more">
+          <summary data-i18n="proj.more"></summary>
+          <div class="more-body">
+            <ul class="ticks"><li data-i18n="p1.d1"></li><li data-i18n="p1.d2"></li><li data-i18n="p1.d3"></li><li data-i18n="p1.d4"></li></ul>
+            <p class="links">
+              <a href="https://github.com/fleury-fcn/halalopenfoodfacts" target="_blank" rel="noopener">GitHub · Food ↗</a>
+              <a href="https://github.com/fleury-fcn/halalopenbeautyfacts" target="_blank" rel="noopener">GitHub · Beauty ↗</a>
+            </p>
+          </div>
+        </details>
+      </li>
+      <!-- p2 -->
+      <li class="card glass reveal">
+        <p class="card-tag" data-i18n="p2.tag"></p>
+        <h4 data-i18n="p2.title"></h4>
+        <p data-i18n="p2.desc"></p>
+        <ul class="chips"><li>PySpark</li><li>Parquet</li><li>scikit-learn</li><li>Streamlit</li></ul>
+        <details class="more">
+          <summary data-i18n="proj.more"></summary>
+          <div class="more-body"><ul class="ticks"><li data-i18n="p2.d1"></li><li data-i18n="p2.d2"></li><li data-i18n="p2.d3"></li></ul></div>
+        </details>
+      </li>
+      <!-- p3 -->
+      <li class="card glass reveal">
+        <p class="card-tag" data-i18n="p3.tag"></p>
+        <h4 data-i18n="p3.title"></h4>
+        <p data-i18n="p3.desc"></p>
+        <ul class="chips"><li>Python</li><li>pandas</li><li>scikit-learn</li><li>Joblib</li></ul>
+        <details class="more">
+          <summary data-i18n="proj.more"></summary>
+          <div class="more-body">
+            <ul class="ticks"><li data-i18n="p3.d1"></li><li data-i18n="p3.d2"></li></ul>
+            <p class="links"><a href="https://github.com/fleury-fcn/prediction-sinistres-machine-learning-" target="_blank" rel="noopener">GitHub ↗</a></p>
+          </div>
+        </details>
+      </li>
+      <!-- p4 -->
+      <li class="card glass reveal">
+        <p class="card-tag" data-i18n="p4.tag"></p>
+        <h4>Documents Assist</h4>
+        <p data-i18n="p4.desc"></p>
+        <ul class="chips"><li>Python</li><li>Streamlit</li><li>PyMuPDF</li><li>TF-IDF</li><li data-i18n="p4.llm"></li></ul>
+        <details class="more">
+          <summary data-i18n="proj.more"></summary>
+          <div class="more-body">
+            <ul class="ticks"><li data-i18n="p4.d1"></li><li data-i18n="p4.d2"></li><li data-i18n="p4.d3"></li></ul>
+            <p class="links"><a href="https://github.com/fleury-fcn/course-assistant" target="_blank" rel="noopener">GitHub ↗</a></p>
+          </div>
+        </details>
+      </li>
+      <!-- p5 -->
+      <li class="card glass reveal">
+        <p class="card-tag" data-i18n="p5.tag"></p>
+        <h4>OpenISTA</h4>
+        <p data-i18n="p5.desc"></p>
+        <ul class="chips"><li>Flask</li><li>PostgreSQL</li><li>SQLAlchemy</li><li>Jinja2</li></ul>
+        <details class="more">
+          <summary data-i18n="proj.more"></summary>
+          <div class="more-body">
+            <ul class="ticks"><li data-i18n="p5.d1"></li></ul>
+            <p class="links"><a href="https://github.com/fleury-fcn/universityplatform" target="_blank" rel="noopener">GitHub ↗</a></p>
+          </div>
+        </details>
+      </li>
+      <!-- p6 -->
+      <li class="card glass reveal">
+        <p class="card-tag" data-i18n="p6.tag"></p>
+        <h4>Maghreb Market</h4>
+        <p data-i18n="p6.desc"></p>
+        <ul class="chips"><li>Next.js</li><li>TypeScript</li><li>Django</li><li>PostgreSQL</li></ul>
+        <details class="more">
+          <summary data-i18n="proj.more"></summary>
+          <div class="more-body">
+            <ul class="ticks"><li data-i18n="p6.d1"></li></ul>
+            <p class="links"><a href="https://github.com/fleury-fcn/magrebmarket" target="_blank" rel="noopener">GitHub ↗</a></p>
+          </div>
+        </details>
+      </li>
+      <!-- p7 -->
+      <li class="card glass reveal">
+        <p class="card-tag" data-i18n="p7.tag"></p>
+        <h4 data-i18n="p7.title"></h4>
+        <p data-i18n="p7.desc"></p>
+        <ul class="chips"><li>R</li><li>SPSS</li><li>KoboToolbox</li></ul>
+        <details class="more">
+          <summary data-i18n="proj.more"></summary>
+          <div class="more-body"><ul class="ticks"><li data-i18n="p7.d1"></li></ul></div>
+        </details>
+      </li>
+      <!-- p8 -->
+      <li class="card glass reveal">
+        <p class="card-tag" data-i18n="p8.tag"></p>
+        <h4>Fleury Finance Tracker</h4>
+        <p data-i18n="p8.desc"></p>
+        <ul class="chips"><li>JavaScript</li><li>GitHub Gist API</li></ul>
+        <details class="more">
+          <summary data-i18n="proj.more"></summary>
+          <div class="more-body">
+            <ul class="ticks"><li data-i18n="p8.d1"></li></ul>
+            <p class="links"><a href="https://github.com/fleury-fcn/Fleury_Finance_Tracker" target="_blank" rel="noopener">GitHub ↗</a></p>
+          </div>
+        </details>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<!-- ============================ PARCOURS ============================ -->
+<section id="parcours" class="section">
+  <div class="wrap">
+    <p class="eyebrow" data-i18n="path.eyebrow"></p>
+    <h2 class="title reveal-title" data-i18n="path.title.html"></h2>
+
+    <div class="path">
+      <div>
+        <h3 class="subtitle" data-i18n="path.exp"></h3>
+        <ol class="timeline">
+          <li class="tl reveal">
+            <p class="tl-date" data-i18n="x1.date"></p>
+            <h4 data-i18n="x1.title"></h4>
+            <p class="tl-org" data-i18n="x1.org"></p>
+            <ul><li data-i18n="x1.b1"></li><li data-i18n="x1.b2"></li><li data-i18n="x1.b3"></li></ul>
+          </li>
+          <li class="tl reveal">
+            <p class="tl-date" data-i18n="x2.date"></p>
+            <h4 data-i18n="x2.title"></h4>
+            <p class="tl-org" data-i18n="x2.org"></p>
+            <ul><li data-i18n="x2.b1"></li><li data-i18n="x2.b2"></li></ul>
+          </li>
+          <li class="tl reveal">
+            <p class="tl-date" data-i18n="x3.date"></p>
+            <h4 data-i18n="x3.title"></h4>
+            <p class="tl-org" data-i18n="x3.org"></p>
+            <ul><li data-i18n="x3.b1"></li><li data-i18n="x3.b2"></li></ul>
+          </li>
+        </ol>
+      </div>
+      <div>
+        <h3 class="subtitle" data-i18n="path.edu"></h3>
+        <ol class="timeline">
+          <li class="tl reveal">
+            <p class="tl-date">2026 – 2027</p>
+            <h4 data-i18n="e1.title"></h4>
+            <p class="tl-org" data-i18n="e1.org"></p>
+          </li>
+          <li class="tl reveal">
+            <p class="tl-date">2025 – 2026</p>
+            <h4 data-i18n="e2.title"></h4>
+            <p class="tl-org" data-i18n="e2.org"></p>
+          </li>
+          <li class="tl reveal">
+            <p class="tl-date">2024 – 2025</p>
+            <h4 data-i18n="e3.title"></h4>
+            <p class="tl-org" data-i18n="e3.org"></p>
+          </li>
+          <li class="tl reveal">
+            <p class="tl-date">2021 – 2024</p>
+            <h4 data-i18n="e4.title"></h4>
+            <p class="tl-org" data-i18n="e4.org"></p>
+          </li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ COMPÉTENCES ============================ -->
+<section id="competences" class="section">
+  <div class="wrap">
+    <p class="eyebrow" data-i18n="skills.eyebrow"></p>
+    <h2 class="title reveal-title" data-i18n="skills.title.html"></h2>
+    <ul class="bento skills">
+      <li class="tile tile-wide glass reveal">
+        <h3 data-i18n="s1.h"></h3>
+        <ul class="chips"><li>Python</li><li>pandas</li><li>PySpark</li><li>SQL</li><li>Bash</li><li data-i18n="s1.etl"></li><li data-i18n="s1.sync"></li><li data-i18n="s1.big"></li><li data-i18n="s1.model"></li><li>Redis / Celery</li></ul>
+      </li>
+      <li class="tile glass reveal">
+        <h3 data-i18n="s2.h"></h3>
+        <ul class="chips"><li data-i18n="s2.llm"></li><li data-i18n="s2.agents"></li><li>RAG</li><li>pgvector</li><li>Claude</li><li>OpenRouter</li></ul>
+      </li>
+      <li class="tile glass reveal">
+        <h3 data-i18n="s3.h"></h3>
+        <ul class="chips"><li>PostgreSQL</li><li>Oracle</li><li>NoSQL</li><li>Redis</li></ul>
+      </li>
+      <li class="tile glass reveal">
+        <h3 data-i18n="s4.h"></h3>
+        <ul class="chips"><li>scikit-learn</li><li data-i18n="s4.pred"></li><li data-i18n="s4.cv"></li><li>Gradient boosting</li></ul>
+      </li>
+      <li class="tile glass reveal">
+        <h3 data-i18n="s5.h"></h3>
+        <ul class="chips"><li>Docker</li><li>Linux</li><li>OVHcloud</li><li>GCP</li><li>Nginx</li><li>Git / GitHub</li><li>GitHub Actions</li></ul>
+      </li>
+      <li class="tile glass reveal">
+        <h3 data-i18n="s6.h"></h3>
+        <ul class="chips"><li>Power BI</li><li>Streamlit</li><li>R</li><li>Excel / VBA</li><li>Stata</li><li>SPSS</li><li>KoboToolbox</li></ul>
+      </li>
+      <li class="tile glass reveal">
+        <h3 data-i18n="s7.h"></h3>
+        <ul class="chips"><li>Django REST</li><li>Flask</li><li>React</li><li>Next.js</li><li>TypeScript</li></ul>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<!-- ============================ CONTACT ============================ -->
+<section id="contact" class="section contact">
+  <div class="wrap">
+    <p class="eyebrow" data-i18n="contact.eyebrow"></p>
+    <h2 class="contact-title reveal-title" data-i18n="contact.title.html"></h2>
+    <p class="contact-lead reveal" data-i18n="contact.lead"></p>
+
+    <div class="contact-actions reveal">
+      <a class="btn btn-accent magnetic email" href="mailto:fleuryniyokwizera2021@gmail.com">fleuryniyokwizera2021@gmail.com</a>
+      <button class="btn btn-glass magnetic copy-btn" type="button" data-email="fleuryniyokwizera2021@gmail.com" data-i18n="contact.copy"></button>
+      <a class="btn btn-glass magnetic" data-i18n-attr="href=cv.href" download data-i18n="cta.cv"></a>
+    </div>
+    <p class="copy-status" role="status" aria-live="polite"></p>
+
+    <ul class="socials reveal">
+      <li><a href="https://www.linkedin.com/in/fleury-niyokwizera-2a9436291" target="_blank" rel="noopener">LinkedIn <span aria-hidden="true">↗</span></a></li>
+      <li><a href="https://github.com/fleury-fcn" target="_blank" rel="noopener">GitHub <span aria-hidden="true">↗</span></a></li>
+      <li><a href="https://wa.me/33745514289" target="_blank" rel="noopener">WhatsApp <span aria-hidden="true">↗</span></a></li>
+      <li><a href="https://www.instagram.com/fleuryniyokwizera" target="_blank" rel="noopener">Instagram <span aria-hidden="true">↗</span></a></li>
+    </ul>
+
+    <div class="gh glass" hidden>
+      <p class="gh-title"><span class="pulse" aria-hidden="true"></span><span data-i18n="gh.title"></span></p>
+      <dl class="gh-stats">
+        <div><dt data-i18n="gh.repos"></dt><dd data-gh="repos">—</dd></div>
+        <div><dt data-i18n="gh.followers"></dt><dd data-gh="followers">—</dd></div>
+        <div><dt data-i18n="gh.stars"></dt><dd data-gh="stars">—</dd></div>
+        <div><dt data-i18n="gh.updated"></dt><dd data-gh="updated">—</dd></div>
+      </dl>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="footer">
+  <div class="wrap footer-inner">
+    <p>© 2026 Fleury Niyokwizera</p>
+    <p data-i18n="footer.built"></p>
+  </div>
+</footer>
+
+<script src="/assets/js/main.js" defer></script>
+</body>
+</html>
