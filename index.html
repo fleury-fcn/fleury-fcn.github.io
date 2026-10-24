@@ -1,36 +1,52 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-WWS4LT1RR4"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-WWS4LT1RR4');
-</script>
-  
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Fleury Niyokwizera — Data Science & IA</title>
-<meta name="description" content="Portfolio de Fleury Niyokwizera, étudiant en Master Data Science & IA à l'Université de Lille. Créateur de HalalOpenFoodFacts.org et HalalOpenBeautyFacts.org, en recherche d'alternance à partir de septembre 2026.">
-<meta property="og:title" content="Fleury Niyokwizera — Data Science & IA">
-<meta property="og:description" content="Portfolio de Fleury Niyokwizera : Data Science, IA et projets open-source (HalalOpenFoodFacts, HalalOpenBeautyFacts).">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fleury Niyokwizera — Data & IA · Alternance</title>
+<meta name="description" content="Fleury Niyokwizera, Chief Engineer chez E-halal et étudiant en Master 1 MIASHS (Data Modeling) à l'Université de Lille. Recherche une alternance Data Analyst, Data Scientist, Data Engineer ou BI, dès que possible.">
+<link rel="canonical" href="https://fleury-fcn.github.io/">
+<link rel="alternate" hreflang="fr" href="https://fleury-fcn.github.io/">
+<link rel="alternate" hreflang="en" href="https://fleury-fcn.github.io/?lang=en">
+<link rel="alternate" hreflang="x-default" href="https://fleury-fcn.github.io/">
+
 <meta property="og:type" content="website">
-<meta property="og:url" content="https://fleury-fcn.github.io">
-<meta property="og:image" content="https://fleury-fcn.github.io/assets/fleury.jpg">
-<meta name="theme-color" content="#070E1F">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='24' fill='%23070E1F'/%3E%3Ctext x='50' y='68' font-family='Georgia,serif' font-size='54' font-weight='700' fill='%23D4AF37' text-anchor='middle'%3EFN%3C/text%3E%3C/svg%3E">
+<meta property="og:url" content="https://fleury-fcn.github.io/">
+<meta property="og:title" content="Fleury Niyokwizera — Data & IA">
+<meta property="og:description" content="Chief Engineer @ E-halal · Master Data Modeling (Université de Lille). Projets data, plateformes open-source et agent IA en production.">
+<meta property="og:image" content="https://fleury-fcn.github.io/assets/img/halal-assistant-hoff.jpg">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:locale:alternate" content="en_US">
+<meta name="twitter:card" content="summary_large_image">
+
+<meta name="theme-color" content="#f8fafc" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0b1220" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="assets/img/fleury-480.jpg">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="assets/css/style.css">
+
+<!-- Thème appliqué avant le rendu pour éviter un flash -->
+<script>
+  try{ const t = localStorage.getItem('fn-theme'); if(t) document.documentElement.dataset.theme = t; }catch(e){}
+</script>
+
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "Person",
   "name": "Fleury Niyokwizera",
-  "url": "https://fleury-fcn.github.io",
+  "url": "https://fleury-fcn.github.io/",
   "image": "https://fleury-fcn.github.io/assets/fleury.jpg",
-  "jobTitle": "Étudiant en Data Science & IA",
-  "affiliation": { "@type": "CollegeOrUniversity", "name": "Université de Lille" },
+  "jobTitle": "Chief Engineer",
+  "worksFor": { "@type": "Organization", "name": "E-halal" },
+  "alumniOf": [
+    { "@type": "CollegeOrUniversity", "name": "Université de Lille" },
+    { "@type": "CollegeOrUniversity", "name": "Université du Burundi" }
+  ],
   "email": "mailto:fleuryniyokwizera2021@gmail.com",
   "sameAs": [
     "https://github.com/fleury-fcn",
@@ -39,288 +55,357 @@
   ]
 }
 </script>
-<link rel="stylesheet" href="assets/css/style.css">
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-WWS4LT1RR4"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-WWS4LT1RR4');
+</script>
 </head>
 <body>
 
-<div class="scroll-progress" id="scrollProgress"></div>
-<div class="cursor-glow" id="cursorGlow"></div>
+<a class="skip-link" href="#main" data-i18n="a11y.skip">Aller au contenu</a>
 
-<nav>
-  <div class="brand"><img class="brand-avatar" src="assets/fleury.jpg" alt="Fleury Niyokwizera">Fleury Niyokwizera</div>
-  <div class="nav-links">
-    <a href="#projets" data-i18n="nav.projects">Projets</a>
-    <a href="#competences" data-i18n="nav.skills">Compétences</a>
-    <a href="#parcours" data-i18n="nav.path">Parcours</a>
-  </div>
-  <div class="nav-right">
-    <a href="#contact" class="nav-cta" data-i18n="nav.contact">Me contacter</a>
-    <div class="lang-toggle">
-      <button class="lang-btn active" data-lang="fr" onclick="setLang('fr')">FR</button>
-      <button class="lang-btn" data-lang="en" onclick="setLang('en')">EN</button>
-    </div>
-  </div>
-</nav>
+<header class="site-header">
+  <nav class="nav container" aria-label="Navigation principale" data-i18n-aria="a11y.nav">
+    <a href="#accueil" class="brand">Fleury Niyokwizera</a>
 
-<section class="hero">
-  <canvas id="particleCanvas" class="hero-canvas"></canvas>
-  <div>
-    <div class="eyebrow" data-i18n="hero.eyebrow">Disponible pour une alternance · Septembre 2026</div>
-    <h1 data-i18n-html="hero.title">Data Science & Intelligence <em>Artificielle</em>,<br>appliquées à des problèmes réels.</h1>
-    <div class="typewriter-line"><span class="type-prefix">&gt;</span> <span id="typewriterText"></span><span class="type-cursor">_</span></div>
-    <p class="hero-sub" data-i18n="hero.sub">Étudiant en Master Mathématiques et Statistiques, parcours Data Modeling, à l'Université de Lille. Je conçois des systèmes de données de bout en bout — du pipeline de collecte au modèle prédictif — et je maintiens deux plateformes open-source d'E-halal utilisées par des milliers de contributeurs.</p>
-    <div class="hero-actions">
-      <a href="#projets" class="btn-primary" data-i18n="hero.cta1">Voir mes projets →</a>
-      <a href="assets/cv-fleury-niyokwizera.pdf" class="btn-ghost" target="_blank" data-i18n="hero.cta2">Télécharger mon CV</a>
-    </div>
-    <div class="hero-stats">
-      <div><div class="stat-num">2</div><div class="stat-label" data-i18n="hero.stat1">PLATEFORMES OPEN-SOURCE</div></div>
-      <div><div class="stat-num">4.5M+</div><div class="stat-label" data-i18n="hero.stat2">PRODUITS EN BASE (E-HALAL)</div></div>
-      <div><div class="stat-num">6+</div><div class="stat-label" data-i18n="hero.stat3">TECHNOLOGIES MAÎTRISÉES</div></div>
-    </div>
-  </div>
-  <div class="id-card">
-    <div class="id-card-inner">
-      <div class="id-photo-stack">
-        <img class="id-photo-layer base" id="idPhotoBase" src="assets/fleury.jpg" alt="Fleury Niyokwizera">
-        <img class="id-photo-layer top" id="idPhotoTop" src="assets/fleury.jpg" alt="">
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="navMenu" aria-label="Ouvrir le menu" data-i18n-aria="a11y.menu">
+      <span></span><span></span><span></span>
+    </button>
+
+    <div class="nav-menu" id="navMenu">
+      <ul class="nav-links">
+        <li><a href="#accueil" data-i18n="nav.home">Accueil</a></li>
+        <li><a href="#a-propos" data-i18n="nav.about">À propos</a></li>
+        <li><a href="#projets" data-i18n="nav.projects">Projets</a></li>
+        <li><a href="#parcours" data-i18n="nav.path">Parcours</a></li>
+        <li><a href="#competences" data-i18n="nav.skills">Compétences</a></li>
+        <li><a href="#contact" data-i18n="nav.contact">Contact</a></li>
+      </ul>
+      <div class="nav-tools">
+        <div class="lang-switch" role="group" aria-label="Langue / Language">
+          <button type="button" class="lang-btn" data-lang="fr" aria-pressed="true">FR</button>
+          <button type="button" class="lang-btn" data-lang="en" aria-pressed="false">EN</button>
+        </div>
+        <button type="button" class="theme-btn" id="themeToggle" aria-label="Changer de thème" data-i18n-aria="a11y.theme">
+          <svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+          <svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+        </button>
       </div>
-      <div class="id-card-shade"></div>
     </div>
-    <div class="id-scan"></div>
-    <div class="id-badge" id="idBadge"><span class="dot"></span><span id="idBadgeText">Fleury Niyokwizera</span></div>
-  </div>
-</section>
+  </nav>
+</header>
 
-<div class="marquee-wrap">
-  <div class="marquee-track">
-    <div class="marquee-item">
-      <span>Data Science</span><span class="sep">✦</span>
-      <span class="accent">Machine Learning</span><span class="sep">✦</span>
-      <span>Data Modeling</span><span class="sep">✦</span>
-      <span class="accent">AI Engineering</span><span class="sep">✦</span>
-      <span>Open Source</span><span class="sep">✦</span>
-      <span class="accent">E-halal</span><span class="sep">✦</span>
+<main id="main">
+
+  <!-- Accueil -->
+  <section id="accueil" class="hero container">
+    <div class="hero-text">
+      <p class="status"><span class="status-dot" aria-hidden="true"></span><span data-i18n="hero.status">Disponible pour une alternance dès que possible · France et Belgique</span></p>
+      <h1>Fleury Niyokwizera</h1>
+      <p class="hero-role" data-i18n="hero.role">Chief Engineer @ E-halal | Master Data Modeling</p>
+      <p class="hero-lead" data-i18n="hero.lead">Je conçois des produits data qui servent des utilisateurs réels : bases de données ouvertes, pipelines et agents IA en production.</p>
+      <div class="hero-actions">
+        <a href="#projets" class="btn btn-primary" data-i18n="hero.cta.projects">Voir mes projets</a>
+        <a href="assets/cv-fleury-niyokwizera.pdf" class="btn btn-secondary js-cv" download data-i18n="hero.cta.cv">Télécharger mon CV</a>
+        <a href="#contact" class="btn btn-ghost" data-i18n="hero.cta.contact">Me contacter</a>
+      </div>
     </div>
-    <div class="marquee-item" aria-hidden="true">
-      <span>Data Science</span><span class="sep">✦</span>
-      <span class="accent">Machine Learning</span><span class="sep">✦</span>
-      <span>Data Modeling</span><span class="sep">✦</span>
-      <span class="accent">AI Engineering</span><span class="sep">✦</span>
-      <span>Open Source</span><span class="sep">✦</span>
-      <span class="accent">E-halal</span><span class="sep">✦</span>
-    </div>
-  </div>
-</div>
+    <figure class="hero-photo">
+      <img src="assets/img/fleury-480.jpg" width="480" height="480" alt="Portrait de Fleury Niyokwizera" data-i18n-alt="hero.photo.alt">
+    </figure>
+  </section>
 
-<div class="github-live">
-  <div class="gh-card reveal">
-    <div class="gh-card-icon">👥</div>
-    <div class="gh-card-num loading" id="ghFollowers"></div>
-    <div class="gh-card-label" data-i18n="gh.followers">Abonnés GitHub</div>
-  </div>
-  <div class="gh-card reveal">
-    <div class="gh-card-icon">📦</div>
-    <div class="gh-card-num loading" id="ghRepos"></div>
-    <div class="gh-card-label" data-i18n="gh.repos">Dépôts publics</div>
-  </div>
-  <div class="gh-card reveal">
-    <div class="gh-card-icon">⭐</div>
-    <div class="gh-card-num loading" id="ghStars"></div>
-    <div class="gh-card-label" data-i18n="gh.stars">Étoiles cumulées</div>
-  </div>
-  <div class="gh-card reveal">
-    <div class="gh-card-icon">🕐</div>
-    <div class="gh-card-num" id="ghSince">2024</div>
-    <div class="gh-card-label" data-i18n="gh.since">Actif depuis</div>
-  </div>
-</div>
-
-<div class="gh-heatmap-wrap reveal">
-  <div class="gh-heatmap-label" data-i18n="gh.heatmap">Activité de contribution — en direct depuis GitHub</div>
-  <img class="gh-heatmap-img" src="https://ghchart.rshah.org/D4AF37/fleury-fcn" alt="Graphique de contributions GitHub de Fleury Niyokwizera" loading="lazy">
-</div>
-
-<section id="projets">
-  <div class="section-head reveal">
-    <div class="section-eyebrow" data-i18n="proj.eyebrow">Projets sélectionnés</div>
-    <div class="section-title" data-i18n-html="proj.title">Ce que j'ai <em>construit.</em></div>
-  </div>
-  <div class="projects">
-
-    <a href="https://halalopenfoodfacts.org" target="_blank" class="project-card reveal">
+  <!-- À propos -->
+  <section id="a-propos" class="section">
+    <div class="container about">
       <div>
-        <div class="project-tag" data-i18n="proj.p1.tag">Chief Engineer · E-halal</div>
-        <h3>HalalOpenFoodFacts & HalalOpenBeautyFacts</h3>
-        <p data-i18n="proj.p1.desc">Deux plateformes open-source construites et maintenues seul : base de données collaborative de plus de 4,5M produits, API publique, scan de conformité halal en temps réel.</p>
-        <div class="stack-row">
-          <div class="stack-pill">Django REST</div>
-          <div class="stack-pill">PostgreSQL</div>
-          <div class="stack-pill">Docker</div>
-          <div class="stack-pill">Redis</div>
-          <div class="stack-pill">Celery</div>
-          <div class="stack-pill">OVHcloud VPS</div>
-        </div>
-        <div class="stack-row" style="margin-top:10px;">
-          <span class="stack-pill" style="color:var(--gold-soft); border-color:rgba(212,175,55,0.35);">🔗 halalopenfoodfacts.org</span>
-          <a href="https://halalopenbeautyfacts.org" target="_blank" onclick="event.stopPropagation()" class="stack-pill" style="color:var(--gold-soft); border-color:rgba(212,175,55,0.35);">🔗 halalopenbeautyfacts.org</a>
-        </div>
+        <h2 class="section-title" data-i18n="about.title">À propos</h2>
+        <p data-i18n="about.p1">Je suis Chief Engineer chez E-halal, une association loi 1901. J'y conçois et maintiens deux plateformes open-source en production : Halal Open Food Facts (4,5 M+ produits alimentaires) et Halal Open Beauty Facts (67 000+ cosmétiques).</p>
+        <p data-i18n="about.p2">En parallèle, je suis en Master 1 MIASHS, parcours Data Modeling, à l'Université de Lille, après une licence en actuariat et un master en statistique appliquée à l'ISTA (Université du Burundi).</p>
+        <p data-i18n="about.p3">Je cherche une alternance en Data Analyst, Data Scientist, Data Engineer ou BI. J'apporte une pratique complète de la chaîne data : collecte, modélisation, mise en production et restitution.</p>
       </div>
-      <div class="project-arrow">↗</div>
-    </a>
-
-    <a href="https://github.com/fleury-fcn/magrebmarket" target="_blank" class="project-card reveal">
-      <div>
-        <div class="project-tag" data-i18n="proj.p5.tag">Full-Stack · Marketplace</div>
-        <h3 data-i18n="proj.p5.title">Maghreb Market</h3>
-        <p data-i18n="proj.p5.desc">Marketplace de petites annonces premium pour le Maghreb (Mauritanie, Maroc, Algérie, Tunisie, Libye) : recherche géographique fine, création guidée d'annonces, messagerie acheteur/vendeur, modération automatique et back-office complet.</p>
-        <div class="stack-row">
-          <div class="stack-pill">Next.js</div>
-          <div class="stack-pill">Django</div>
-          <div class="stack-pill">TypeScript</div>
-          <div class="stack-pill">PostgreSQL</div>
-        </div>
-      </div>
-      <div class="project-arrow">↗</div>
-    </a>
-
-    <a href="https://github.com/fleury-fcn/universityplatform" target="_blank" class="project-card reveal">
-      <div>
-        <div class="project-tag" data-i18n="proj.p6.tag">Projet de fin d'études · ISTA</div>
-        <h3>OpenISTA</h3>
-        <p data-i18n="proj.p6.desc">Plateforme web complète de gestion de campus universitaire, développée pour l'Institut de Statistique Appliquée (ISTA), Université du Burundi : étudiants, corps enseignant, cours, bibliothèque, vie associative et messagerie interne.</p>
-        <div class="stack-row">
-          <div class="stack-pill">Python / Flask</div>
-          <div class="stack-pill">PostgreSQL</div>
-          <div class="stack-pill">Flask-Migrate</div>
-          <div class="stack-pill">Jinja2</div>
-        </div>
-      </div>
-      <div class="project-arrow">↗</div>
-    </a>
-    <a href="https://github.com/fleury-fcn/prediction-sinistres-machine-learning-" target="_blank" class="project-card reveal">
-      <div>
-        <div class="project-tag" data-i18n="proj.p2.tag">Machine Learning</div>
-        <h3 data-i18n="proj.p2.title">Prédiction de sinistres — Assurance</h3>
-        <p data-i18n="proj.p2.desc">Pipeline ML modulaire pour la prédiction de sinistres : optimisation d'hyperparamètres via RandomizedSearchCV, validation croisée robuste et sérialisation des modèles pour mise en production.</p>
-        <div class="stack-row">
-          <div class="stack-pill">Python</div>
-          <div class="stack-pill">Scikit-learn</div>
-          <div class="stack-pill">Joblib</div>
-          <div class="stack-pill">Pandas</div>
-        </div>
-      </div>
-      <div class="project-arrow">↗</div>
-    </a>
-
-    <a href="https://github.com/fleury-fcn/Fleury_Finance_Tracker" target="_blank" class="project-card reveal">
-      <div>
-        <div class="project-tag" data-i18n="proj.p7.tag">Développement personnel</div>
-        <h3>Fleury Finance Tracker</h3>
-        <p data-i18n="proj.p7.desc">Suivi de finances personnelles bilingue BIF/EUR en une seule page HTML, avec synchronisation via GitHub Gist comme backend distant — pensé pour le contexte financier burundais.</p>
-        <div class="stack-row">
-          <div class="stack-pill">HTML / JS</div>
-          <div class="stack-pill">GitHub Gist API</div>
-          <div class="stack-pill">BIF / EUR</div>
-        </div>
-      </div>
-      <div class="project-arrow">↗</div>
-    </a>
-
-    <div class="project-card reveal">
-      <div>
-        <div class="project-tag" data-i18n="proj.p3.tag">Big Data · ISTA</div>
-        <h3 data-i18n="proj.p3.title">Pipeline NYC Yellow Taxi</h3>
-        <p data-i18n="proj.p3.desc">Traitement distribué de données massives de trajets new-yorkais, avec dashboard interactif de restitution des indicateurs clés en temps réel.</p>
-        <div class="stack-row">
-          <div class="stack-pill">PySpark</div>
-          <div class="stack-pill">Streamlit</div>
-        </div>
-      </div>
-      <div class="project-arrow">↗</div>
+      <dl class="facts">
+        <div><dt data-i18n="about.f1.k">Recherche</dt><dd data-i18n="about.f1.v">Alternance Data / BI, dès que possible</dd></div>
+        <div><dt data-i18n="about.f2.k">Localisation</dt><dd data-i18n="about.f2.v">Lille · mobile en France et en Belgique</dd></div>
+        <div><dt data-i18n="about.f3.k">Formation</dt><dd data-i18n="about.f3.v">Master 1 MIASHS, Data Modeling — Université de Lille</dd></div>
+        <div><dt data-i18n="about.f4.k">Langues</dt><dd data-i18n="about.f4.v">Français C2 · Anglais C2</dd></div>
+      </dl>
     </div>
+  </section>
 
-    <div class="project-card reveal">
-      <div>
-        <div class="project-tag" data-i18n="proj.p4.tag">Statistiques appliquées</div>
-        <h3 data-i18n="proj.p4.title">Étude ISOKO IRAMA / SESA (projet UE)</h3>
-        <p data-i18n="proj.p4.desc">Analyse statistique complète sur 489 répondants pour un projet financé par l'UE, avec méthodologie stricte de séparation structures/individus et collecte terrain via KoboCollect.</p>
-        <div class="stack-row">
-          <div class="stack-pill">R</div>
-          <div class="stack-pill">KoboToolbox</div>
-          <div class="stack-pill">SPSS</div>
+  <!-- Projets -->
+  <section id="projets" class="section">
+    <div class="container">
+      <h2 class="section-title" data-i18n="proj.title">Projets</h2>
+
+      <article class="featured" aria-labelledby="featuredTitle">
+        <div class="featured-head">
+          <p class="kicker" data-i18n="feat.kicker">Projet à la une · E-halal · 2026</p>
+          <h3 id="featuredTitle" data-i18n="feat.title">Halal Assistant : un agent IA pour Halal Open Food Facts et Halal Open Beauty Facts</h3>
+        </div>
+
+        <div class="featured-body">
+          <div class="featured-text">
+            <h4 data-i18n="feat.problem.h">Problème</h4>
+            <p data-i18n="feat.problem.p">Les deux bases comptent plusieurs millions de fiches. Trouver un produit adapté, comprendre son statut halal ou savoir comment contribuer demandait de maîtriser la recherche et les filtres des sites.</p>
+
+            <h4 data-i18n="feat.solution.h">Solution</h4>
+            <p data-i18n="feat.solution.p">Un assistant conversationnel intégré aux deux sites. Il s'appuie sur la base produits (RAG) et sur Claude, via OpenRouter, pour répondre en langage naturel, avec un lien vers chaque fiche citée.</p>
+            <ul class="checklist">
+              <li data-i18n="feat.f1">Répond aux questions sur un produit.</li>
+              <li data-i18n="feat.f2">Évalue la conformité halal à partir des ingrédients, et distingue un label vérifié d'un label déclaré par les contributeurs.</li>
+              <li data-i18n="feat.f3">Aide l'utilisateur à choisir des produits halal adaptés à sa demande.</li>
+              <li data-i18n="feat.f4">Aide à compléter une fiche produit.</li>
+              <li data-i18n="feat.f5">Guide l'utilisateur dans la navigation des sites.</li>
+            </ul>
+
+            <h4 data-i18n="feat.role.h">Mon rôle</h4>
+            <p data-i18n="feat.role.p">Conception de l'agent et intégration dans les deux plateformes, en tant que Chief Engineer d'E-halal.</p>
+
+            <h4 data-i18n="feat.results.h">Résultats</h4>
+            <ul class="checklist">
+              <li data-i18n="feat.r1">En production sur halalopenfoodfacts.org et halalopenbeautyfacts.org.</li>
+              <li data-i18n="feat.r2">Garde-fous visibles : avertissement sur les limites de l'IA, statut nuancé (compatible, ambigu) et lien vers la fiche source.</li>
+            </ul>
+
+            <ul class="tags" aria-label="Technologies" data-i18n-aria="a11y.tech">
+              <li>Claude</li><li>OpenRouter</li><li>RAG</li><li>PostgreSQL</li><li>Django REST</li><li>Docker</li>
+            </ul>
+
+            <div class="links">
+              <a href="https://halalopenfoodfacts.org" target="_blank" rel="noopener">halalopenfoodfacts.org ↗</a>
+              <a href="https://halalopenbeautyfacts.org" target="_blank" rel="noopener">halalopenbeautyfacts.org ↗</a>
+            </div>
+          </div>
+
+          <div class="featured-media">
+            <figure class="shot shot-chat">
+              <img src="assets/img/halal-assistant-chat.jpg" width="608" height="900" loading="lazy"
+                   alt="Halal Assistant propose des produits pour la requête « lait halal », avec un statut et un lien vers chaque fiche" data-i18n-alt="feat.img1.alt">
+              <figcaption data-i18n="feat.img1.cap">Réponse de l'agent sur halalopenfoodfacts.org.</figcaption>
+            </figure>
+
+            <figure class="flow" aria-labelledby="flowCap">
+              <ol>
+                <li data-i18n="feat.flow1">Question de l'utilisateur</li>
+                <li data-i18n="feat.flow2">Recherche dans la base produits (RAG)</li>
+                <li data-i18n="feat.flow3">Génération par Claude via OpenRouter</li>
+                <li data-i18n="feat.flow4">Réponse avec liens vers les fiches</li>
+              </ol>
+              <figcaption id="flowCap" data-i18n="feat.flow.cap">Fonctionnement simplifié de l'agent.</figcaption>
+            </figure>
+          </div>
+        </div>
+      </article>
+
+      <h3 class="subhead" data-i18n="proj.others">Autres projets</h3>
+      <div class="cards">
+
+        <article class="card">
+          <p class="kicker" data-i18n="p1.tag">Data Engineering · E-halal</p>
+          <h4>Halal Open Food Facts & Halal Open Beauty Facts</h4>
+          <p data-i18n="p1.desc">Deux plateformes open-source auto-hébergées sur OVHcloud. 4,5 M+ produits importés depuis Open Food Facts et synchronisés automatiquement, API publique, statistiques recalculées après chaque synchronisation.</p>
+          <ul class="tags"><li>Django REST</li><li>PostgreSQL</li><li>Redis / Celery</li><li>Docker</li><li>Nginx</li></ul>
+          <div class="links">
+            <a href="https://github.com/fleury-fcn/halalopenfoodfacts" target="_blank" rel="noopener">GitHub (Food) ↗</a>
+            <a href="https://github.com/fleury-fcn/halalopenbeautyfacts" target="_blank" rel="noopener">GitHub (Beauty) ↗</a>
+          </div>
+        </article>
+
+        <article class="card">
+          <p class="kicker" data-i18n="p2.tag">Machine Learning</p>
+          <h4 data-i18n="p2.title">Prédiction de sinistres en assurance</h4>
+          <p data-i18n="p2.desc">Pipeline ML modulaire : recherche d'hyperparamètres (RandomizedSearchCV), validation croisée, mapping de datasets configurable et sérialisation des modèles.</p>
+          <ul class="tags"><li>Python</li><li>Pandas</li><li>scikit-learn</li><li>Joblib</li></ul>
+          <div class="links"><a href="https://github.com/fleury-fcn/prediction-sinistres-machine-learning-" target="_blank" rel="noopener">GitHub ↗</a></div>
+        </article>
+
+        <article class="card">
+          <p class="kicker" data-i18n="p3.tag">Big Data · ISTA</p>
+          <h4 data-i18n="p3.title">Pipeline Big Data NYC Yellow Taxi</h4>
+          <p data-i18n="p3.desc">Traitement distribué des trajets de taxis new-yorkais, 4 modèles de machine learning et dashboard interactif de restitution.</p>
+          <ul class="tags"><li>PySpark</li><li>Streamlit</li><li>Machine Learning</li></ul>
+        </article>
+
+        <article class="card">
+          <p class="kicker" data-i18n="p4.tag">Statistique appliquée</p>
+          <h4 data-i18n="p4.title">Étude ISOKO IRAMA / SESA (projet financé par l'UE)</h4>
+          <p data-i18n="p4.desc">Analyse statistique de 489 répondants, avec séparation méthodologique structures / individus et collecte terrain via KoboCollect.</p>
+          <ul class="tags"><li>R</li><li>SPSS</li><li>KoboToolbox</li></ul>
+        </article>
+
+        <article class="card">
+          <p class="kicker" data-i18n="p5.tag">Full-stack · Marketplace</p>
+          <h4>Maghreb Market</h4>
+          <p data-i18n="p5.desc">Marketplace de petites annonces pour le Maghreb : recherche géographique, création guidée d'annonces, messagerie acheteur/vendeur, modération automatique et back-office.</p>
+          <ul class="tags"><li>Next.js</li><li>TypeScript</li><li>Django</li><li>PostgreSQL</li></ul>
+          <div class="links"><a href="https://github.com/fleury-fcn/magrebmarket" target="_blank" rel="noopener">GitHub ↗</a></div>
+        </article>
+
+        <article class="card">
+          <p class="kicker" data-i18n="p6.tag">Projet de fin de M1 · ISTA</p>
+          <h4>OpenISTA</h4>
+          <p data-i18n="p6.desc">Plateforme de gestion universitaire pour l'ISTA (Université du Burundi) : étudiants, enseignants, cours, bibliothèque et messagerie interne.</p>
+          <ul class="tags"><li>Flask</li><li>PostgreSQL</li><li>SQLAlchemy</li><li>Jinja2</li></ul>
+          <div class="links"><a href="https://github.com/fleury-fcn/universityplatform" target="_blank" rel="noopener">GitHub ↗</a></div>
+        </article>
+
+        <article class="card">
+          <p class="kicker" data-i18n="p7.tag">Projet personnel</p>
+          <h4>Fleury Finance Tracker</h4>
+          <p data-i18n="p7.desc">Suivi de finances personnelles BIF/EUR dans une seule page HTML, synchronisé via l'API GitHub Gist.</p>
+          <ul class="tags"><li>JavaScript</li><li>GitHub Gist API</li></ul>
+          <div class="links"><a href="https://github.com/fleury-fcn/Fleury_Finance_Tracker" target="_blank" rel="noopener">GitHub ↗</a></div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Parcours -->
+  <section id="parcours" class="section">
+    <div class="container">
+      <h2 class="section-title" data-i18n="path.title">Parcours</h2>
+
+      <div class="path">
+        <div>
+          <h3 class="subhead" data-i18n="path.exp">Expérience</h3>
+          <ol class="timeline">
+            <li>
+              <p class="tl-date" data-i18n="x1.date">Depuis oct. 2025 · Lille</p>
+              <h4 data-i18n="x1.title">Chief Engineer — E-halal (association loi 1901)</h4>
+              <ul>
+                <li data-i18n="x1.b1">Conçoit et maintient deux plateformes open-source en production (Django REST, PostgreSQL, Docker, Redis/Celery).</li>
+                <li data-i18n="x1.b2">Migre vers une infrastructure auto-hébergée OVHcloud : 4,5 M+ produits importés et synchronisés automatiquement, sans dépendance à l'API publique Open Food Facts.</li>
+                <li data-i18n="x1.b3">Intègre Halal Assistant, un agent IA (Claude via OpenRouter, RAG) déployé sur les deux sites.</li>
+                <li data-i18n="x1.b4">Met en place la contribution open-source : CI, documentation, licence et politique de sécurité.</li>
+              </ul>
+            </li>
+            <li>
+              <p class="tl-date" data-i18n="x2.date">Fév. – juin 2025 · Burundi</p>
+              <h4 data-i18n="x2.title">Assistant consultant, suivi et évaluation — Projet UMWUGA N'AKAZI (CREOPS, BBIN, WHH)</h4>
+              <ul>
+                <li data-i18n="x2.b1">Collecte et analyse les données terrain (KoboToolbox) ; produit les indicateurs et rapports statistiques d'un projet d'insertion socio-économique.</li>
+              </ul>
+            </li>
+            <li>
+              <p class="tl-date" data-i18n="x3.date">Juil. – oct. 2024 · Burundi</p>
+              <h4 data-i18n="x3.title">Stagiaire Data Science appliquée à l'assurance — SOCAR Vie</h4>
+              <ul>
+                <li data-i18n="x3.b1">Étudie et prototype l'intégration de l'IA dans la tarification en assurance vie.</li>
+              </ul>
+            </li>
+          </ol>
+        </div>
+
+        <div>
+          <h3 class="subhead" data-i18n="path.edu">Formation</h3>
+          <ol class="timeline">
+            <li>
+              <p class="tl-date">2026 – 2027</p>
+              <h4 data-i18n="e1.title">Master 1 MIASHS, parcours Data Modeling</h4>
+              <p data-i18n="e1.sub">Université de Lille</p>
+            </li>
+            <li>
+              <p class="tl-date">2024 – 2026</p>
+              <h4 data-i18n="e2.title">Master Statistique appliquée et informatique décisionnelle</h4>
+              <p data-i18n="e2.sub">ISTA, Université du Burundi · mémoire en cours de finalisation</p>
+            </li>
+            <li>
+              <p class="tl-date">2021 – 2024</p>
+              <h4 data-i18n="e3.title">Licence en actuariat, spécialisation analyse des risques</h4>
+              <p data-i18n="e3.sub">ISTA, Université du Burundi</p>
+            </li>
+          </ol>
         </div>
       </div>
-      <div class="project-arrow">↗</div>
     </div>
+  </section>
 
-  </div>
-</section>
-
-<section id="competences">
-  <div class="section-head reveal">
-    <div class="section-eyebrow" data-i18n="skills.eyebrow">Boîte à outils</div>
-    <div class="section-title" data-i18n-html="skills.title">Compétences <em>techniques.</em></div>
-  </div>
-  <div class="skills-grid">
-    <div class="skill-chip reveal">Python</div>
-    <div class="skill-chip reveal">R</div>
-    <div class="skill-chip reveal">SQL</div>
-    <div class="skill-chip reveal">PySpark</div>
-    <div class="skill-chip reveal">TypeScript / React</div>
-    <div class="skill-chip reveal">Node.js</div>
-    <div class="skill-chip reveal">Django REST</div>
-    <div class="skill-chip reveal">PostgreSQL</div>
-    <div class="skill-chip reveal">Docker</div>
-    <div class="skill-chip reveal">Scikit-learn</div>
-    <div class="skill-chip reveal">Stata / Eviews</div>
-    <div class="skill-chip reveal">CSPro</div>
-    <div class="skill-chip reveal" data-i18n="skills.excel">Excel avancé</div>
-    <div class="skill-chip reveal">VBA</div>
-  </div>
-</section>
-
-<section id="parcours">
-  <div class="section-head reveal">
-    <div class="section-eyebrow" data-i18n="path.eyebrow">Parcours</div>
-    <div class="section-title" data-i18n-html="path.title">D'où je <em>viens.</em></div>
-  </div>
-  <div class="timeline">
-    <div class="tl-item reveal">
-      <div class="tl-date">2025 — 2027</div>
-      <div><h4 data-i18n="path.t1.title">Master Mathématiques et Statistiques, parcours Data Modeling</h4><p data-i18n="path.t1.sub">Université de Lille</p></div>
+  <!-- Compétences -->
+  <section id="competences" class="section">
+    <div class="container">
+      <h2 class="section-title" data-i18n="skills.title">Compétences</h2>
+      <div class="skills">
+        <div class="skill-group">
+          <h3 data-i18n="s1.h">Data & machine learning</h3>
+          <ul class="tags"><li>Python</li><li>R</li><li>SQL</li><li>Pandas</li><li>PySpark</li><li>scikit-learn</li><li data-i18n="s1.stats">Analyse statistique</li></ul>
+        </div>
+        <div class="skill-group">
+          <h3 data-i18n="s2.h">IA générative</h3>
+          <ul class="tags"><li>Claude</li><li>OpenRouter</li><li>RAG</li></ul>
+        </div>
+        <div class="skill-group">
+          <h3 data-i18n="s3.h">Visualisation & BI</h3>
+          <ul class="tags"><li>Power BI</li><li>Tableau</li><li>Streamlit</li><li data-i18n="s3.excel">Excel avancé</li><li>VBA</li></ul>
+        </div>
+        <div class="skill-group">
+          <h3 data-i18n="s4.h">Bases de données</h3>
+          <ul class="tags"><li>PostgreSQL</li><li>Oracle</li><li>SQLAlchemy</li><li>Redis</li></ul>
+        </div>
+        <div class="skill-group">
+          <h3 data-i18n="s5.h">Développement</h3>
+          <ul class="tags"><li>Django REST</li><li>Flask</li><li>React</li><li>Next.js</li><li>Node.js</li><li>TypeScript</li></ul>
+        </div>
+        <div class="skill-group">
+          <h3 data-i18n="s6.h">Infrastructure</h3>
+          <ul class="tags"><li>Docker</li><li>Linux</li><li>Nginx</li><li>OVHcloud</li><li>Celery</li><li>Git / GitHub</li></ul>
+        </div>
+        <div class="skill-group">
+          <h3 data-i18n="s7.h">Outils statistiques</h3>
+          <ul class="tags"><li>Stata</li><li>SPSS</li><li>EViews</li><li>CSPro</li><li>KoboToolbox</li></ul>
+        </div>
+      </div>
     </div>
-    <div class="tl-item reveal">
-      <div class="tl-date">2023 — 2025</div>
-      <div><h4 data-i18n="path.t2.title">Master 2 Statistique Appliquée et Informatique Décisionnelle</h4><p data-i18n="path.t2.sub">ISTA — Université du Burundi</p></div>
-    </div>
-    <div class="tl-item reveal">
-      <div class="tl-date" data-i18n="path.t3.date">Depuis 2024</div>
-      <div><h4 data-i18n="path.t3.title">Chief Engineer — E-halal (association loi 1901)</h4><p data-i18n="path.t3.sub">Conception et maintenance de HalalOpenFoodFacts.org et HalalOpenBeautyFacts.org</p></div>
-    </div>
-  </div>
-</section>
+  </section>
 
-<section class="cta-section reveal" id="contact">
-  <h2 data-i18n-html="cta.title">Construisons quelque chose<br>d'<em>utile</em>, ensemble.</h2>
-  <p data-i18n="cta.sub">Ouvert aux opportunités d'alternance en Data Science et Ingénierie Logicielle à partir de septembre 2026.</p>
-  <div class="contact-links">
-    <a href="mailto:fleuryniyokwizera2021@gmail.com" class="btn-primary" data-i18n="cta.email">Écrire un email</a>
-    <button type="button" class="btn-ghost copy-email-btn" onclick="copyEmail(this)" data-i18n="cta.copy">📋 Copier l'email</button>
-    <a href="https://wa.me/33745514289" target="_blank" class="btn-ghost">WhatsApp</a>
-    <a href="https://www.linkedin.com/in/fleury-niyokwizera-2a9436291" class="btn-ghost">LinkedIn</a>
-    <a href="https://github.com/fleury-fcn" class="btn-ghost">GitHub</a>
-    <a href="https://www.instagram.com/fleuryniyokwizera" target="_blank" class="btn-ghost">Instagram</a>
-  </div>
-  <div class="copy-toast" id="copyToast" data-i18n="cta.copied">✓ Adresse copiée !</div>
-</section>
+  <!-- Contact -->
+  <section id="contact" class="section">
+    <div class="container contact">
+      <h2 class="section-title" data-i18n="contact.title">Contact</h2>
+      <p class="contact-lead" data-i18n="contact.lead">Vous recrutez un alternant Data ou BI ? Écrivez-moi par email ou sur LinkedIn.</p>
 
-<footer>
-  <div>© 2026 Fleury Niyokwizera</div>
-  <div data-i18n="footer.loc">Lille, France</div>
+      <div class="contact-main">
+        <a class="btn btn-primary" href="mailto:fleuryniyokwizera2021@gmail.com">fleuryniyokwizera2021@gmail.com</a>
+        <button type="button" class="btn btn-ghost" id="copyEmail" data-i18n="contact.copy">Copier l'email</button>
+        <a href="assets/cv-fleury-niyokwizera.pdf" class="btn btn-secondary js-cv" download data-i18n="hero.cta.cv">Télécharger mon CV</a>
+      </div>
+      <p class="sr-status" id="copyStatus" role="status" aria-live="polite"></p>
+
+      <ul class="social">
+        <li><a href="https://www.linkedin.com/in/fleury-niyokwizera-2a9436291" target="_blank" rel="noopener">LinkedIn</a></li>
+        <li><a href="https://github.com/fleury-fcn" target="_blank" rel="noopener">GitHub</a></li>
+        <li><a href="https://wa.me/33745514289" target="_blank" rel="noopener">WhatsApp</a></li>
+        <li><a href="https://www.instagram.com/fleuryniyokwizera" target="_blank" rel="noopener">Instagram</a></li>
+      </ul>
+
+      <div class="gh-stats" id="ghStats" hidden>
+        <p class="gh-line">
+          <span data-i18n="gh.label">Sur GitHub</span> :
+          <strong id="ghRepos">—</strong> <span data-i18n="gh.repos">dépôts publics</span> ·
+          <strong id="ghFollowers">—</strong> <span data-i18n="gh.followers">abonnés</span> ·
+          <strong id="ghStars">—</strong> <span data-i18n="gh.stars">étoiles</span>
+        </p>
+        <img class="gh-chart" id="ghChart" src="https://ghchart.rshah.org/0f766e/fleury-fcn" width="663" height="104" loading="lazy"
+             alt="Graphique des contributions GitHub de Fleury Niyokwizera sur un an" data-i18n-alt="gh.chart.alt">
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <p>© 2026 Fleury Niyokwizera</p>
+    <p data-i18n="footer.loc">Lille, France</p>
+  </div>
 </footer>
 
 <script src="assets/js/main.js"></script>
-
 </body>
 </html>

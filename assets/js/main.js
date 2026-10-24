@@ -1,293 +1,310 @@
-const observer = new IntersectionObserver((entries)=>{
-  entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); } });
-}, { threshold: 0.15 });
-document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
+// Portfolio — Fleury Niyokwizera
+// Navigation, thème clair/sombre, bascule FR/EN, CV par langue, stats GitHub.
 
-// Barre de progression de lecture
-const progressBar = document.getElementById('scrollProgress');
-window.addEventListener('scroll', ()=>{
-  const h = document.documentElement;
-  const pct = (h.scrollTop) / (h.scrollHeight - h.clientHeight) * 100;
-  if(progressBar) progressBar.style.width = pct + '%';
-}, { passive:true });
+const CV = {
+  fr: 'assets/cv-fleury-niyokwizera.pdf',
+  en: 'assets/cv-fleury-niyokwizera-en.pdf'
+};
+const EMAIL = 'fleuryniyokwizera2021@gmail.com';
+const GH_USER = 'fleury-fcn';
 
-// Halo lumineux qui suit le curseur
-const glow = document.getElementById('cursorGlow');
-if(glow && window.matchMedia('(hover:hover) and (pointer:fine)').matches){
-  document.addEventListener('mousemove', (e)=>{
-    glow.style.left = e.clientX + 'px';
-    glow.style.top = e.clientY + 'px';
-    glow.classList.add('active');
-  });
-  document.addEventListener('mouseleave', ()=> glow.classList.remove('active'));
-}
-
-// Compteurs animés (stats du hero)
-function animateCount(el, target, suffix, duration){
-  const start = performance.now();
-  function step(now){
-    const p = Math.min((now - start) / duration, 1);
-    const eased = 1 - Math.pow(1 - p, 3);
-    const val = target < 10 ? (target * eased).toFixed(0) : Math.floor(target * eased);
-    el.textContent = (target >= 1000000 ? (val/1000000).toFixed(1)+'M' : val) + suffix;
-    if(p < 1) requestAnimationFrame(step);
-    else el.textContent = (target >= 1000000 ? (target/1000000).toFixed(1)+'M' : target) + suffix;
-  }
-  requestAnimationFrame(step);
-}
-document.querySelectorAll('.hero-stats > div').forEach((wrap, i)=>{
-  const numEl = wrap.querySelector('.stat-num');
-  if(!numEl) return;
-  const raw = numEl.textContent.trim();
-  let target, suffix;
-  if(raw.includes('M')){ target = parseFloat(raw) * 1000000; suffix = '+'; }
-  else if(raw.includes('+')){ target = parseInt(raw); suffix = '+'; }
-  else { target = parseInt(raw) || 0; suffix = ''; }
-  numEl.dataset.done = 'false';
-  const statObserver = new IntersectionObserver((entries)=>{
-    entries.forEach(entry=>{
-      if(entry.isIntersecting && numEl.dataset.done === 'false'){
-        numEl.dataset.done = 'true';
-        animateCount(numEl, target, suffix, 1400);
-      }
-    });
-  }, { threshold: 0.5 });
-  statObserver.observe(numEl);
-});
-
-// Statistiques GitHub en direct
-(async function loadGithubStats(){
-  const elFollowers = document.getElementById('ghFollowers');
-  const elRepos = document.getElementById('ghRepos');
-  const elStars = document.getElementById('ghStars');
-  try{
-    const userRes = await fetch('https://api.github.com/users/fleury-fcn');
-    const user = await userRes.json();
-    const reposRes = await fetch('https://api.github.com/users/fleury-fcn/repos?per_page=100');
-    const repos = await reposRes.json();
-    const totalStars = Array.isArray(repos) ? repos.reduce((sum, r)=> sum + (r.stargazers_count||0), 0) : 0;
-
-    if(elFollowers){ elFollowers.classList.remove('loading'); animateCount(elFollowers, user.followers||0, '', 1000); }
-    if(elRepos){ elRepos.classList.remove('loading'); animateCount(elRepos, user.public_repos||0, '', 1000); }
-    if(elStars){ elStars.classList.remove('loading'); animateCount(elStars, totalStars, '', 1000); }
-  }catch(e){
-    // Repli silencieux si l'API GitHub est indisponible ou limitée
-    if(elFollowers){ elFollowers.classList.remove('loading'); elFollowers.textContent = '—'; }
-    if(elRepos){ elRepos.classList.remove('loading'); elRepos.textContent = '—'; }
-    if(elStars){ elStars.classList.remove('loading'); elStars.textContent = '—'; }
-  }
-})();
-
-// Réseau de particules animé (canvas) dans le hero
-(function initParticles(){
-  const canvas = document.getElementById('particleCanvas');
-  if(!canvas) return;
-  const ctx = canvas.getContext('2d');
-  const hero = canvas.closest('.hero');
-  let particles = [];
-  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-  function resize(){
-    canvas.width = hero.offsetWidth;
-    canvas.height = hero.offsetHeight;
-    const count = Math.min(70, Math.floor((canvas.width * canvas.height) / 18000));
-    particles = Array.from({ length: count }, ()=>({
-      x: Math.random()*canvas.width, y: Math.random()*canvas.height,
-      vx: (Math.random()-0.5)*0.35, vy: (Math.random()-0.5)*0.35, r: Math.random()*1.6+0.6
-    }));
-  }
-  function tick(){
-    ctx.clearRect(0,0,canvas.width,canvas.height);
-    particles.forEach(p=>{
-      p.x += p.vx; p.y += p.vy;
-      if(p.x < 0 || p.x > canvas.width) p.vx *= -1;
-      if(p.y < 0 || p.y > canvas.height) p.vy *= -1;
-    });
-    for(let i=0;i<particles.length;i++){
-      for(let j=i+1;j<particles.length;j++){
-        const dx = particles[i].x - particles[j].x, dy = particles[i].y - particles[j].y;
-        const dist = Math.sqrt(dx*dx + dy*dy);
-        if(dist < 130){
-          ctx.strokeStyle = `rgba(212,175,55,${0.16 * (1 - dist/130)})`;
-          ctx.lineWidth = 1;
-          ctx.beginPath(); ctx.moveTo(particles[i].x, particles[i].y); ctx.lineTo(particles[j].x, particles[j].y); ctx.stroke();
-        }
-      }
-    }
-    particles.forEach(p=>{
-      ctx.fillStyle = 'rgba(232,203,116,0.55)';
-      ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, Math.PI*2); ctx.fill();
-    });
-    if(!reduceMotion) requestAnimationFrame(tick);
-  }
-  resize();
-  window.addEventListener('resize', resize);
-  tick();
-})();
-
-// Effet machine à écrire pour les rôles
-(function initTypewriter(){
-  const el = document.getElementById('typewriterText');
-  if(!el) return;
-  const roles = {
-    fr: ['Data Scientist', 'Ingénieur ML', 'Développeur IA', 'Bâtisseur Open-Source', 'Data Modeler'],
-    en: ['Data Scientist', 'ML Engineer', 'AI Developer', 'Open-Source Builder', 'Data Modeler']
-  };
-  let roleIndex = 0, charIndex = 0, deleting = false;
-  function currentRoles(){ return roles[document.documentElement.lang === 'en' ? 'en' : 'fr']; }
-  function loop(){
-    const list = currentRoles();
-    const word = list[roleIndex % list.length];
-    if(!deleting){
-      charIndex++;
-      el.textContent = word.slice(0, charIndex);
-      if(charIndex === word.length){ deleting = true; setTimeout(loop, 1600); return; }
-    } else {
-      charIndex--;
-      el.textContent = word.slice(0, charIndex);
-      if(charIndex === 0){ deleting = false; roleIndex++; }
-    }
-    setTimeout(loop, deleting ? 40 : 80);
-  }
-  loop();
-})();
-
-// Tilt 3D au survol des cartes projets
-// Carrousel de la carte ID — alterne photos perso / campus Université de Lille
-// avec balayage diagonal (clip-path) + effet Ken Burns continu
-(function initIdPhotoCarousel(){
-  const top = document.getElementById('idPhotoTop');
-  const base = document.getElementById('idPhotoBase');
-  const badgeText = document.getElementById('idBadgeText');
-  const badge = document.getElementById('idBadge');
-  if(!top || !base) return;
-
-  const media = [
-    { src:'assets/fleury.jpg', caption:'Fleury Niyokwizera' },
-    { src:'assets/lille-university.jpg', caption:'Université de Lille' },
-    { src:'assets/fleury-balcony.jpg', caption:'En session de travail' },
-    { src:'assets/lille-campus.jpg', caption:'Campus de Lille' },
-    { src:'assets/fleury-desk.jpg', caption:'Setup de code' },
-    { src:'assets/lille-learning-center.jpg', caption:'Lilliad Learning Center' },
-    { src:'assets/lille-euralille.jpg', caption:'Lille, Hauts-de-France' }
-  ];
-  if(media.length < 2) return;
-
-  const HIDDEN_CLIP = 'polygon(0% 0%, 0% 0%, -25% 100%, -25% 100%)';
-  const VISIBLE_CLIP = 'polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)';
-  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  let idx = 0;
-
-  function goTo(nextIdx){
-    const item = media[nextIdx];
-    top.style.transition = 'none';
-    top.style.clipPath = HIDDEN_CLIP;
-    void top.offsetWidth; // force reflow
-    top.src = item.src;
-    top.onload = ()=>{
-      top.style.transition = 'clip-path 1.3s cubic-bezier(.77,0,.18,1)';
-      requestAnimationFrame(()=>{ top.style.clipPath = VISIBLE_CLIP; });
-      if(badge){ badge.style.opacity = '0'; }
-      setTimeout(()=>{
-        base.src = item.src;
-        if(badgeText){ badgeText.textContent = item.caption; }
-        if(badge){ badge.style.opacity = '1'; }
-      }, 1300);
-    };
-  }
-
-  if(reduceMotion) return; // laisse la première photo fixe si mouvement réduit demandé
-
-  setInterval(()=>{
-    idx = (idx + 1) % media.length;
-    goTo(idx);
-  }, 4600);
-})();
-
-(function initTilt(){
-  if(!window.matchMedia('(hover:hover) and (pointer:fine)').matches) return;
-  document.querySelectorAll('.project-card').forEach(card=>{
-    card.addEventListener('mousemove', (e)=>{
-      const rect = card.getBoundingClientRect();
-      const x = (e.clientX - rect.left) / rect.width - 0.5;
-      const y = (e.clientY - rect.top) / rect.height - 0.5;
-      card.style.transform = `perspective(900px) rotateY(${x*4}deg) rotateX(${-y*4}deg) translateY(-3px)`;
-    });
-    card.addEventListener('mouseleave', ()=>{ card.style.transform = ''; });
-  });
-})();
-
-// Copier l'email en un clic
-function copyEmail(btn){
-  const email = 'fleuryniyokwizera2021@gmail.com';
-  const toast = document.getElementById('copyToast');
-  const done = ()=>{ if(toast){ toast.classList.add('show'); setTimeout(()=>toast.classList.remove('show'), 2000); } };
-  if(navigator.clipboard && navigator.clipboard.writeText){
-    navigator.clipboard.writeText(email).then(done).catch(done);
-  } else {
-    const tmp = document.createElement('input');
-    tmp.value = email; document.body.appendChild(tmp); tmp.select();
-    document.execCommand('copy'); document.body.removeChild(tmp); done();
-  }
-}
-
+/* ----------------------------------------------------------
+   Traductions anglaises (le français est dans le HTML)
+   ---------------------------------------------------------- */
 const translations = {
   en: {
-    "gh.heatmap":"Contribution activity — live from GitHub",
-    "cta.copy":"📋 Copy email","cta.copied":"✓ Address copied!",
-    "gh.followers":"GitHub followers","gh.repos":"Public repos","gh.stars":"Total stars","gh.since":"Active since",
-    "nav.projects":"Projects","nav.skills":"Skills","nav.path":"Journey","nav.contact":"Contact me",
-    "hero.eyebrow":"Available for an apprenticeship · September 2026",
-    "hero.title":"Data Science & Artificial <em>Intelligence</em>,<br>applied to real problems.",
-    "hero.sub":"Master's student in Mathematics and Statistics, Data Modeling track, at Université de Lille. I build end-to-end data systems — from collection pipelines to predictive models — and maintain two open-source platforms at E-halal used by thousands of contributors.",
-    "hero.cta1":"View my projects →","hero.cta2":"Download my CV",
-    "hero.stat1":"OPEN-SOURCE PLATFORMS","hero.stat2":"PRODUCTS IN DATABASE (E-HALAL)","hero.stat3":"TECHNOLOGIES MASTERED",
-    "proj.eyebrow":"Selected projects","proj.title":"What I've <em>built.</em>",
-    "proj.p1.tag":"Chief Engineer · E-halal",
-    "proj.p1.desc":"Two open-source platforms built and maintained solo: a collaborative database of over 4.5M products, a public API, real-time halal compliance scanning.",
-    "proj.p2.tag":"Machine Learning","proj.p2.title":"Insurance Claims Prediction",
-    "proj.p2.desc":"Modular ML pipeline for claims prediction: hyperparameter tuning via RandomizedSearchCV, robust cross-validation, and model serialization for production.",
-    "proj.p3.tag":"Big Data · ISTA","proj.p3.title":"NYC Yellow Taxi Pipeline",
-    "proj.p3.desc":"Distributed processing of massive New York trip data, with an interactive dashboard reporting key metrics in real time.",
-    "proj.p4.tag":"Applied Statistics","proj.p4.title":"ISOKO IRAMA / SESA Study (EU-funded project)",
-    "proj.p4.desc":"Full statistical analysis on 489 respondents for an EU-funded project, with strict structures/individuals separation methodology and field data collection via KoboCollect.",
-    "proj.p5.tag":"Full-Stack · Marketplace",
-    "proj.p5.desc":"Premium classifieds marketplace for North Africa (Mauritania, Morocco, Algeria, Tunisia, Libya): fine-grained geographic search, guided listing creation, buyer/seller messaging, auto-moderation and a full back-office.",
-    "proj.p6.tag":"Capstone Project · ISTA",
-    "proj.p6.desc":"Full-featured web platform for university campus management, built for the Institute of Applied Statistics (ISTA), University of Burundi: students, faculty, courses, library, campus life and internal messaging.",
-    "proj.p7.tag":"Personal Project",
-    "proj.p7.desc":"Bilingual BIF/EUR personal finance tracker in a single HTML page, syncing via GitHub Gist as a remote backend — built for the Burundian financial context.",
-    "skills.eyebrow":"Toolbox","skills.title":"Technical <em>skills.</em>","skills.excel":"Advanced Excel",
-    "path.eyebrow":"Journey","path.title":"Where I come <em>from.</em>",
-    "path.t1.title":"Master in Mathematics and Statistics, Data Modeling track","path.t1.sub":"Université de Lille",
-    "path.t2.title":"Master 2 Applied Statistics & Decision Support IT","path.t2.sub":"ISTA — University of Burundi",
-    "path.t3.date":"Since 2024","path.t3.title":"Chief Engineer — E-halal (French non-profit)","path.t3.sub":"Design and maintenance of HalalOpenFoodFacts.org and HalalOpenBeautyFacts.org",
-    "cta.title":"Let's build something<br><em>useful</em>, together.",
-    "cta.sub":"Open to apprenticeship opportunities in Data Science and Software Engineering starting September 2026.",
-    "cta.email":"Send an email","footer.loc":"Lille, France"
+    "meta.title": "Fleury Niyokwizera — Data & AI · Work-study",
+    "meta.description": "Fleury Niyokwizera, Chief Engineer at E-halal and first-year Master's student in MIASHS (Data Modeling) at Université de Lille. Looking for a Data Analyst, Data Scientist, Data Engineer or BI work-study position, starting as soon as possible.",
+
+    "a11y.skip": "Skip to content",
+    "a11y.nav": "Main navigation",
+    "a11y.menu": "Open menu",
+    "a11y.theme": "Toggle theme",
+    "a11y.tech": "Technologies",
+
+    "nav.home": "Home", "nav.about": "About", "nav.projects": "Projects",
+    "nav.path": "Experience", "nav.skills": "Skills", "nav.contact": "Contact",
+
+    "hero.status": "Available for a work-study position as soon as possible · France and Belgium",
+    "hero.role": "Chief Engineer @ E-halal | Master's in Data Modeling",
+    "hero.lead": "I build data products for real users: open databases, pipelines and AI agents in production.",
+    "hero.cta.projects": "View my projects",
+    "hero.cta.cv": "Download my CV",
+    "hero.cta.contact": "Contact me",
+    "hero.photo.alt": "Portrait of Fleury Niyokwizera",
+
+    "about.title": "About",
+    "about.p1": "I am Chief Engineer at E-halal, a French non-profit. I design and maintain two open-source platforms in production: Halal Open Food Facts (4.5M+ food products) and Halal Open Beauty Facts (67,000+ cosmetics).",
+    "about.p2": "I am also a first-year Master's student in MIASHS, Data Modeling track, at Université de Lille, after a Bachelor's in actuarial science and a Master's in applied statistics at ISTA (University of Burundi).",
+    "about.p3": "I am looking for a work-study position as a Data Analyst, Data Scientist, Data Engineer or BI analyst. I bring hands-on experience of the full data chain: collection, modeling, deployment and reporting.",
+    "about.f1.k": "Looking for", "about.f1.v": "Data / BI work-study, as soon as possible",
+    "about.f2.k": "Location", "about.f2.v": "Lille · open to France and Belgium",
+    "about.f3.k": "Education", "about.f3.v": "Master 1 MIASHS, Data Modeling — Université de Lille",
+    "about.f4.k": "Languages", "about.f4.v": "French C2 · English C2",
+
+    "proj.title": "Projects",
+    "proj.others": "Other projects",
+
+    "feat.kicker": "Featured project · E-halal · 2026",
+    "feat.title": "Halal Assistant: an AI agent for Halal Open Food Facts and Halal Open Beauty Facts",
+    "feat.problem.h": "Problem",
+    "feat.problem.p": "The two databases hold millions of product records. Finding a suitable product, understanding its halal status or knowing how to contribute required mastering the sites' search and filters.",
+    "feat.solution.h": "Solution",
+    "feat.solution.p": "A conversational assistant built into both sites. It relies on the product database (RAG) and on Claude, via OpenRouter, to answer in plain language, with a link to every product it cites.",
+    "feat.f1": "Answers questions about a product.",
+    "feat.f2": "Assesses halal compliance from the ingredients, and distinguishes a verified label from one declared by contributors.",
+    "feat.f3": "Helps users choose halal products that match their request.",
+    "feat.f4": "Helps complete a product record.",
+    "feat.f5": "Guides users through the sites.",
+    "feat.role.h": "My role",
+    "feat.role.p": "Designed the agent and integrated it into both platforms, as E-halal's Chief Engineer.",
+    "feat.results.h": "Results",
+    "feat.r1": "In production on halalopenfoodfacts.org and halalopenbeautyfacts.org.",
+    "feat.r2": "Visible safeguards: a warning about AI limits, a nuanced status (compatible, ambiguous) and a link to the source record.",
+    "feat.img1.alt": "Halal Assistant suggests products for the query “halal milk”, with a status and a link to each product record",
+    "feat.img1.cap": "Agent answer on halalopenfoodfacts.org (in French).",
+    "feat.flow1": "User question",
+    "feat.flow2": "Search in the product database (RAG)",
+    "feat.flow3": "Generation by Claude via OpenRouter",
+    "feat.flow4": "Answer with links to product records",
+    "feat.flow.cap": "How the agent works, simplified.",
+
+    "p1.tag": "Data Engineering · E-halal",
+    "p1.desc": "Two open-source platforms self-hosted on OVHcloud. 4.5M+ products imported from Open Food Facts and synchronised automatically, a public API, and statistics recomputed after each sync.",
+    "p2.tag": "Machine Learning",
+    "p2.title": "Insurance claims prediction",
+    "p2.desc": "Modular ML pipeline: hyperparameter search (RandomizedSearchCV), cross-validation, configurable dataset mapping and model serialisation.",
+    "p3.tag": "Big Data · ISTA",
+    "p3.title": "NYC Yellow Taxi Big Data pipeline",
+    "p3.desc": "Distributed processing of New York taxi trips, 4 machine learning models and an interactive reporting dashboard.",
+    "p4.tag": "Applied statistics",
+    "p4.title": "ISOKO IRAMA / SESA study (EU-funded project)",
+    "p4.desc": "Statistical analysis of 489 respondents, with a methodological split between organisations and individuals, and field data collection via KoboCollect.",
+    "p5.tag": "Full-stack · Marketplace",
+    "p5.desc": "Classified ads marketplace for North Africa: geographic search, guided listing creation, buyer/seller messaging, automatic moderation and back-office.",
+    "p6.tag": "First-year Master's project · ISTA",
+    "p6.desc": "University management platform for ISTA (University of Burundi): students, faculty, courses, library and internal messaging.",
+    "p7.tag": "Personal project",
+    "p7.desc": "Personal finance tracker in BIF/EUR, in a single HTML page, synchronised through the GitHub Gist API.",
+
+    "path.title": "Experience",
+    "path.exp": "Work experience",
+    "path.edu": "Education",
+    "x1.date": "Since Oct. 2025 · Lille",
+    "x1.title": "Chief Engineer — E-halal (French non-profit)",
+    "x1.b1": "Design and maintain two open-source platforms in production (Django REST, PostgreSQL, Docker, Redis/Celery).",
+    "x1.b2": "Migrated to self-hosted OVHcloud infrastructure: 4.5M+ products imported and synchronised automatically, with no dependency on the public Open Food Facts API.",
+    "x1.b3": "Integrated Halal Assistant, an AI agent (Claude via OpenRouter, RAG) deployed on both sites.",
+    "x1.b4": "Set up open-source contribution: CI, documentation, licence and security policy.",
+    "x2.date": "Feb. – June 2025 · Burundi",
+    "x2.title": "Assistant consultant, monitoring & evaluation — UMWUGA N'AKAZI project (CREOPS, BBIN, WHH)",
+    "x2.b1": "Collected and analysed field data (KoboToolbox); produced indicators and statistical reports for a socio-economic inclusion project.",
+    "x3.date": "July – Oct. 2024 · Burundi",
+    "x3.title": "Data Science intern, insurance — SOCAR Vie",
+    "x3.b1": "Studied and prototyped the use of AI in life insurance pricing.",
+    "e1.title": "Master 1 MIASHS, Data Modeling track",
+    "e1.sub": "Université de Lille",
+    "e2.title": "Master's in Applied Statistics and Business Intelligence",
+    "e2.sub": "ISTA, University of Burundi · thesis being finalised",
+    "e3.title": "Bachelor's in Actuarial Science, Risk Analysis",
+    "e3.sub": "ISTA, University of Burundi",
+
+    "skills.title": "Skills",
+    "s1.h": "Data & machine learning", "s1.stats": "Statistical analysis",
+    "s2.h": "Generative AI",
+    "s3.h": "Visualisation & BI", "s3.excel": "Advanced Excel",
+    "s4.h": "Databases",
+    "s5.h": "Development",
+    "s6.h": "Infrastructure",
+    "s7.h": "Statistical tools",
+
+    "contact.title": "Contact",
+    "contact.lead": "Hiring a Data or BI work-study student? Reach me by email or on LinkedIn.",
+    "contact.copy": "Copy email",
+    "contact.copied": "Email address copied.",
+    "contact.copyFail": "Copy failed. The address is: ",
+
+    "gh.label": "On GitHub", "gh.repos": "public repos", "gh.followers": "followers", "gh.stars": "stars",
+    "gh.chart.alt": "Fleury Niyokwizera's GitHub contributions over one year",
+
+    "footer.loc": "Lille, France"
+  },
+  // Chaînes générées par le JS, en français
+  fr: {
+    "contact.copied": "Adresse email copiée.",
+    "contact.copyFail": "La copie a échoué. L'adresse est : "
   }
 };
 
+const root = document.documentElement;
+let currentLang = 'fr';
+const t = (key) => (translations[currentLang] && translations[currentLang][key]) || originals[key] || '';
+
+/* ----------------------------------------------------------
+   Bascule FR / EN
+   ---------------------------------------------------------- */
 const originals = {};
-document.querySelectorAll('[data-i18n]').forEach(el=> originals[el.getAttribute('data-i18n')] = el.textContent );
-document.querySelectorAll('[data-i18n-html]').forEach(el=> originals[el.getAttribute('data-i18n-html')] = el.innerHTML );
+const descMeta = document.querySelector('meta[name="description"]');
+originals['meta.title'] = document.title;
+originals['meta.description'] = descMeta ? descMeta.content : '';
+document.querySelectorAll('[data-i18n]').forEach(el => { originals[el.dataset.i18n] = el.textContent; });
+document.querySelectorAll('[data-i18n-aria]').forEach(el => { originals[el.dataset.i18nAria] = el.getAttribute('aria-label'); });
+document.querySelectorAll('[data-i18n-alt]').forEach(el => { originals[el.dataset.i18nAlt] = el.getAttribute('alt'); });
 
 function setLang(lang){
-  document.documentElement.lang = lang;
-  document.querySelectorAll('.lang-btn').forEach(b=> b.classList.toggle('active', b.dataset.lang===lang) );
+  currentLang = lang === 'en' ? 'en' : 'fr';
+  const dict = currentLang === 'en' ? translations.en : {};
+  const pick = (key) => dict[key] || originals[key];
 
-  document.querySelectorAll('[data-i18n]').forEach(el=>{
-    const key = el.getAttribute('data-i18n');
-    el.textContent = lang==='en' ? (translations.en[key] || originals[key]) : originals[key];
-  });
-  document.querySelectorAll('[data-i18n-html]').forEach(el=>{
-    const key = el.getAttribute('data-i18n-html');
-    el.innerHTML = lang==='en' ? (translations.en[key] || originals[key]) : originals[key];
-  });
-  try{ localStorage.setItem('fn-lang', lang); }catch(e){}
+  root.lang = currentLang;
+  document.title = pick('meta.title');
+  if(descMeta) descMeta.content = pick('meta.description');
+  document.querySelectorAll('[data-i18n]').forEach(el => { el.textContent = pick(el.dataset.i18n); });
+  document.querySelectorAll('[data-i18n-aria]').forEach(el => { el.setAttribute('aria-label', pick(el.dataset.i18nAria)); });
+  document.querySelectorAll('[data-i18n-alt]').forEach(el => { el.setAttribute('alt', pick(el.dataset.i18nAlt)); });
+  document.querySelectorAll('.lang-btn').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.lang === currentLang)));
+
+  updateCvLinks();
+
+  // URL partageable : ?lang=en (cible du hreflang anglais)
+  const url = new URL(window.location.href);
+  if(currentLang === 'en') url.searchParams.set('lang', 'en'); else url.searchParams.delete('lang');
+  history.replaceState(null, '', url);
+
+  try{ localStorage.setItem('fn-lang', currentLang); }catch(e){}
 }
 
-try{
-  const saved = localStorage.getItem('fn-lang');
-  if(saved === 'en') setLang('en');
-}catch(e){}
+document.querySelectorAll('.lang-btn').forEach(b => b.addEventListener('click', () => setLang(b.dataset.lang)));
+
+/* ----------------------------------------------------------
+   CV : version anglaise si le fichier existe, sinon version française
+   ---------------------------------------------------------- */
+let cvEnAvailable = false;
+
+function updateCvLinks(){
+  const href = currentLang === 'en' && cvEnAvailable ? CV.en : CV.fr;
+  document.querySelectorAll('.js-cv').forEach(a => a.setAttribute('href', href));
+}
+
+fetch(CV.en, { method: 'HEAD' })
+  .then(res => { cvEnAvailable = res.ok; updateCvLinks(); })
+  .catch(() => {});
+
+/* ----------------------------------------------------------
+   Thème clair / sombre
+   ---------------------------------------------------------- */
+const themeBtn = document.getElementById('themeToggle');
+const darkQuery = window.matchMedia('(prefers-color-scheme: dark)');
+
+function isDark(){
+  return root.dataset.theme ? root.dataset.theme === 'dark' : darkQuery.matches;
+}
+if(themeBtn){
+  themeBtn.addEventListener('click', () => {
+    const next = isDark() ? 'light' : 'dark';
+    root.dataset.theme = next;
+    try{ localStorage.setItem('fn-theme', next); }catch(e){}
+  });
+}
+
+/* ----------------------------------------------------------
+   Menu mobile
+   ---------------------------------------------------------- */
+const navToggle = document.querySelector('.nav-toggle');
+const navMenu = document.getElementById('navMenu');
+
+function closeMenu(){
+  if(!navMenu) return;
+  navMenu.classList.remove('open');
+  navToggle.setAttribute('aria-expanded', 'false');
+}
+if(navToggle && navMenu){
+  navToggle.addEventListener('click', () => {
+    const open = navMenu.classList.toggle('open');
+    navToggle.setAttribute('aria-expanded', String(open));
+  });
+  navMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMenu));
+  document.addEventListener('keydown', (e) => { if(e.key === 'Escape') closeMenu(); });
+}
+
+/* ----------------------------------------------------------
+   Lien actif dans la navigation selon la section visible
+   ---------------------------------------------------------- */
+const navLinks = Array.from(document.querySelectorAll('.nav-links a'));
+if('IntersectionObserver' in window){
+  const spy = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if(!entry.isIntersecting) return;
+      navLinks.forEach(a => {
+        const active = a.getAttribute('href') === '#' + entry.target.id;
+        a.classList.toggle('active', active);
+        if(active) a.setAttribute('aria-current', 'true'); else a.removeAttribute('aria-current');
+      });
+    });
+  }, { rootMargin: '-45% 0px -50% 0px' });
+  document.querySelectorAll('main section[id]').forEach(s => spy.observe(s));
+}
+
+/* ----------------------------------------------------------
+   Copier l'email
+   ---------------------------------------------------------- */
+const copyBtn = document.getElementById('copyEmail');
+const copyStatus = document.getElementById('copyStatus');
+
+if(copyBtn){
+  copyBtn.addEventListener('click', async () => {
+    let ok = false;
+    try{
+      await navigator.clipboard.writeText(EMAIL);
+      ok = true;
+    }catch(e){}
+    if(copyStatus){
+      copyStatus.textContent = ok ? t('contact.copied') : t('contact.copyFail') + EMAIL;
+      setTimeout(() => { copyStatus.textContent = ''; }, 4000);
+    }
+  });
+}
+
+/* ----------------------------------------------------------
+   Stats GitHub : affichées uniquement si l'API répond
+   ---------------------------------------------------------- */
+(async function loadGithubStats(){
+  const box = document.getElementById('ghStats');
+  if(!box) return;
+  const chart = document.getElementById('ghChart');
+  if(chart) chart.addEventListener('error', () => chart.remove());
+
+  const ctrl = new AbortController();
+  const timer = setTimeout(() => ctrl.abort(), 6000);
+  try{
+    const [userRes, reposRes] = await Promise.all([
+      fetch(`https://api.github.com/users/${GH_USER}`, { signal: ctrl.signal }),
+      fetch(`https://api.github.com/users/${GH_USER}/repos?per_page=100`, { signal: ctrl.signal })
+    ]);
+    if(!userRes.ok || !reposRes.ok) throw new Error('GitHub API ' + userRes.status);
+    const user = await userRes.json();
+    const repos = await reposRes.json();
+    const stars = Array.isArray(repos) ? repos.reduce((sum, r) => sum + (r.stargazers_count || 0), 0) : 0;
+    const fmt = (n) => Number(n || 0).toLocaleString(root.lang);
+
+    document.getElementById('ghRepos').textContent = fmt(user.public_repos);
+    document.getElementById('ghFollowers').textContent = fmt(user.followers);
+    document.getElementById('ghStars').textContent = fmt(stars);
+    box.hidden = false;
+  }catch(e){
+    // API indisponible ou quota atteint : le bloc reste masqué
+  }finally{
+    clearTimeout(timer);
+  }
+})();
+
+/* ----------------------------------------------------------
+   Langue initiale : ?lang=en, sinon préférence enregistrée
+   ---------------------------------------------------------- */
+(function initLang(){
+  const param = new URLSearchParams(window.location.search).get('lang');
+  let saved = null;
+  try{ saved = localStorage.getItem('fn-lang'); }catch(e){}
+  const lang = param || saved;
+  if(lang === 'en') setLang('en');
+})();
